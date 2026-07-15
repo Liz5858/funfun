@@ -61,6 +61,31 @@
             padding: 0;
         }
 
+        .brand-cluster {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .mom-btn {
+            flex-shrink: 0;
+            font-family: inherit;
+            font-size: 0.82rem;
+            padding: 5px 11px;
+            border-radius: 999px;
+            border: 2px solid #FFAB91;
+            background: linear-gradient(180deg, #FFF3E0, #FFE0B2);
+            color: #BF360C;
+            cursor: pointer;
+            line-height: 1.2;
+            box-shadow: 0 2px 0 #FFCCBC;
+            transition: transform 0.12s ease;
+        }
+
+        .mom-btn:hover { transform: scale(1.05); }
+        .mom-btn:active { transform: scale(0.96); }
+
         .money-badge {
             display: inline-flex;
             align-items: center;
@@ -140,6 +165,16 @@
             font-size: clamp(1rem, 3.5vw, 1.2rem);
             color: #8D6E63;
             line-height: 1.4;
+        }
+
+        .hero-sub.name-intro {
+            margin-bottom: 28px;
+        }
+
+        /* 이름 입력 placeholder 연하게 */
+        #nameInput::placeholder {
+            color: #BCAAA4;
+            opacity: 1;
         }
 
         .mascot {
@@ -254,6 +289,193 @@
             box-shadow: 0 6px 18px rgba(186, 104, 200, 0.35);
         }
 
+        .name-chip:focus-visible {
+            outline: 3px solid #AB47BC;
+            outline-offset: 3px;
+        }
+
+        /* 메인 홈: 중앙 균형 */
+        #screen-home .home-card {
+            gap: 6px;
+            justify-content: center;
+            min-height: min(52vh, 420px);
+            padding-top: clamp(28px, 6vw, 44px);
+            padding-bottom: clamp(28px, 6vw, 44px);
+        }
+
+        #screen-home .mascot {
+            margin-bottom: 4px;
+        }
+
+        #screen-home .home-sub {
+            margin-bottom: 8px;
+        }
+
+        #screen-home .name-chip {
+            margin: 18px 0 6px;
+        }
+
+        #screen-home .claim-reward-btn {
+            margin-top: 4px;
+            margin-bottom: 0;
+            width: auto;
+            max-width: none;
+            padding: 12px 22px;
+            font-size: clamp(1rem, 3.5vw, 1.15rem);
+            background: linear-gradient(180deg, #FFF59D, #FFD54F);
+            color: #E65100;
+            border: 3px solid #FFB300;
+            box-shadow: 0 4px 0 #FFCA28, 0 8px 14px rgba(255, 179, 0, 0.28);
+        }
+
+        #screen-home .claim-reward-btn:hover:not(:disabled) {
+            transform: scale(1.04);
+        }
+
+        #screen-home .home-change-name {
+            margin-top: 18px;
+        }
+
+        /* 아이 보상 교환 */
+        .overlay-card.shop-card {
+            max-width: 440px;
+            text-align: left;
+            position: relative;
+        }
+
+        .shop-balance {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            margin: 0 0 14px;
+            padding: 10px 16px;
+            border-radius: 999px;
+            background: linear-gradient(180deg, #FFF8E1, #FFECB3);
+            border: 3px solid var(--money);
+            font-size: clamp(1.05rem, 3.5vw, 1.25rem);
+            color: #5D4037;
+            box-shadow: 0 3px 10px rgba(255, 193, 7, 0.2);
+        }
+
+        .shop-balance .shop-balance-value {
+            color: #EF6C00;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .shop-msg {
+            min-height: 1.35em;
+            margin: 0 0 10px;
+            font-size: 1rem;
+            text-align: center;
+            color: #E53935;
+            font-weight: 700;
+        }
+
+        .shop-msg.is-ok {
+            color: #2E7D32;
+        }
+
+        .shop-reward-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: min(46vh, 320px);
+            overflow-y: auto;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+        }
+
+        .shop-reward-list:empty::after {
+            content: '아직 받을 수 있는 보상이 없어요';
+            display: block;
+            padding: 24px 14px;
+            text-align: center;
+            color: #A1887F;
+            font-size: 1rem;
+            border: 3px dashed #FFCCBC;
+            border-radius: 18px;
+            background: #FFF8F3;
+        }
+
+        .shop-reward-btn {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            width: 100%;
+            padding: 14px 16px;
+            border-radius: 18px;
+            border: 3px solid #FFCCBC;
+            background: linear-gradient(180deg, #FFFCF7, #FFF3E0);
+            font-family: inherit;
+            cursor: pointer;
+            text-align: left;
+            color: var(--ink);
+            box-shadow: 0 4px 0 #FFCCBC;
+            transition: transform 0.12s ease, box-shadow 0.12s ease;
+            touch-action: manipulation;
+        }
+
+        .shop-reward-btn:hover {
+            transform: translateY(-2px);
+            border-color: #FF8A65;
+            box-shadow: 0 6px 0 #FFAB91;
+        }
+
+        .shop-reward-btn:active {
+            transform: translateY(2px);
+            box-shadow: 0 1px 0 #FFCCBC;
+        }
+
+        .shop-reward-btn .shop-reward-name {
+            flex: 1;
+            min-width: 0;
+            font-size: clamp(1.05rem, 3.5vw, 1.2rem);
+            font-weight: 700;
+            word-break: keep-all;
+        }
+
+        .shop-reward-btn .shop-reward-cost {
+            flex-shrink: 0;
+            font-size: 0.95rem;
+            color: #EF6C00;
+            background: #FFF8E1;
+            border: 2px solid #FFD54F;
+            border-radius: 999px;
+            padding: 4px 10px;
+            font-variant-numeric: tabular-nums;
+        }
+
+        /* 단어 입력 화면 — 귀여운 강아지 캐릭터 */
+        #screen-words .words-card {
+            gap: 8px;
+        }
+
+        #screen-words .words-mascot {
+            width: clamp(96px, 28vw, 128px);
+            height: clamp(96px, 28vw, 128px);
+            margin: 0 auto 6px;
+            animation: bounceSoft 2.4s ease-in-out infinite;
+        }
+
+        #screen-words .words-mascot svg {
+            width: 100%;
+            height: 100%;
+            display: block;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.08));
+        }
+
+        #screen-words .hero-title {
+            margin-bottom: 4px;
+        }
+
+        #screen-words .field-label {
+            margin-top: 10px;
+            margin-bottom: 8px;
+        }
+
         .hint { margin: 0; font-size: 1rem; color: #A1887F; }
         .error-msg {
             color: #E53935;
@@ -338,13 +560,13 @@
         .balloon-sky {
             position: relative;
             width: 100%;
-            min-height: 320px;
+            min-height: 220px;
             background:
                 linear-gradient(180deg, #E1F5FE 0%, #B3E5FC 55%, #E0F7FA 100%);
             border-radius: 24px;
             border: 3px solid #81D4FA;
             overflow: hidden;
-            padding: 20px 10px 28px;
+            padding: 12px 6px 14px;
             z-index: 1;
             isolation: isolate;
         }
@@ -354,20 +576,27 @@
             flex-wrap: wrap;
             justify-content: center;
             align-items: center;
-            gap: clamp(14px, 3.5vw, 24px);
-            min-height: 260px;
+            align-content: center;
+            /* 한 줄에 5~6개 들어오도록 간격 축소 */
+            gap: clamp(2px, 1vw, 8px);
+            row-gap: clamp(4px, 1.2vw, 10px);
+            min-height: 170px;
             position: relative;
             z-index: 2;
         }
 
         .balloon {
             --b-color: var(--balloon-good);
-            /* 아이들이 터치하기 쉬운 큰 풍선 */
-            width: clamp(110px, 28vw, 150px);
-            height: clamp(130px, 33vw, 175px);
+            /* 히트영역: 시각 크기(50%)보다 여유 — 터치/클릭 쉽게 */
+            width: clamp(72px, 17vw, 96px);
+            height: clamp(84px, 20vw, 112px);
             border: none;
             background: transparent;
-            padding: 0;
+            padding: 8px 6px;
+            box-sizing: border-box;
+            display: grid;
+            place-items: center;
+            flex: 0 0 auto;
             cursor: pointer;
             position: relative;
             z-index: 3;
@@ -381,15 +610,16 @@
 
         .balloon:focus-visible {
             outline: 3px solid #5E35B1;
-            outline-offset: 4px;
+            outline-offset: 2px;
             border-radius: 12px;
         }
 
-        /* 떠다니는 움직임은 안쪽에만 → 버튼 히트영역/active transform 안정화 */
+        /* 떠다니는 움직임은 안쪽에만 → 버튼 히트영역/active transform 안정화
+           시각적 풍선 = 기존 대비 정확히 50% */
         .balloon-inner {
             display: block;
-            width: 100%;
-            height: 100%;
+            width: clamp(55px, 14vw, 75px);
+            height: clamp(65px, 16.5vw, 87px);
             animation: floatY 2.8s ease-in-out infinite;
             pointer-events: none;
             transform-origin: center bottom;
@@ -404,39 +634,40 @@
             height: 78%;
             border-radius: 50% 50% 45% 45%;
             background: radial-gradient(circle at 30% 28%, #fff 0%, var(--b-color) 42%, color-mix(in srgb, var(--b-color) 70%, #000) 100%);
+            background-size: 100% 100%;
             display: grid;
             place-items: center;
             color: #fff;
-            /* 기존 대비 0.8배 — 여백과 함께 중앙 정렬 */
-            font-size: clamp(2.4rem, 8vw, 3.4rem);
+            /* 풍선 50%에 맞춘 알파벳 — 중앙 정렬 */
+            font-size: clamp(1.2rem, 4vw, 1.7rem);
             font-weight: 700;
             line-height: 1;
             letter-spacing: 0.02em;
-            text-shadow: 0 2px 4px rgba(0,0,0,0.28);
-            box-shadow: inset -4px -8px 12px rgba(0,0,0,0.12), 0 6px 14px rgba(0,0,0,0.12);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.28);
+            box-shadow: inset -2px -4px 6px rgba(0,0,0,0.12), 0 3px 7px rgba(0,0,0,0.12);
             position: relative;
             pointer-events: none;
             transition: filter 0.12s ease, box-shadow 0.12s ease;
-            padding: 12px 14px 16px;
+            padding: 4px 5px 6px;
             box-sizing: border-box;
         }
 
         .balloon .bubble::after {
             content: '';
             position: absolute;
-            bottom: -8px;
+            bottom: -4px;
             left: 50%;
             transform: translateX(-50%);
-            border-left: 7px solid transparent;
-            border-right: 7px solid transparent;
-            border-top: 10px solid color-mix(in srgb, var(--b-color) 80%, #000);
+            border-left: 3.5px solid transparent;
+            border-right: 3.5px solid transparent;
+            border-top: 5px solid color-mix(in srgb, var(--b-color) 80%, #000);
             pointer-events: none;
         }
 
         .balloon .string {
-            width: 2px;
+            width: 1.5px;
             height: 18%;
-            margin: 10px auto 0;
+            margin: 5px auto 0;
             background: #90A4AE;
             pointer-events: none;
         }
@@ -458,9 +689,9 @@
         .balloon.is-pressed .bubble,
         .balloon:active .bubble {
             box-shadow:
-                inset -2px -4px 8px rgba(0,0,0,0.1),
-                0 0 0 4px rgba(255, 255, 255, 0.65),
-                0 8px 18px rgba(0,0,0,0.18);
+                inset -1px -2px 4px rgba(0,0,0,0.1),
+                0 0 0 3px rgba(255, 255, 255, 0.65),
+                0 4px 10px rgba(0,0,0,0.18);
             filter: saturate(1.25);
         }
 
@@ -479,7 +710,7 @@
 
         @keyframes floatY {
             0%, 100% { transform: translateY(0); }
-            50% { transform: translateY(-10px); }
+            50% { transform: translateY(-6px); }
         }
 
         @keyframes burstPop {
@@ -502,8 +733,8 @@
             justify-content: center;
             align-items: stretch;
             gap: 12px;
-            margin-top: 18px;
-            min-height: 72px;
+            margin-top: 12px;
+            min-height: 64px;
             width: 100%;
         }
 
@@ -630,6 +861,229 @@
             box-shadow: 0 16px 40px rgba(255, 193, 7, 0.35);
         }
 
+        /* ── 엄마(관리자) 보상 관리 ── */
+        .overlay-card.admin-card {
+            max-width: 480px;
+            text-align: left;
+            position: relative;
+        }
+
+        .overlay-card.admin-card .admin-title {
+            margin: 0 0 6px;
+            font-size: clamp(1.25rem, 4.5vw, 1.55rem);
+            color: #BF360C;
+            text-align: center;
+            text-shadow: none;
+        }
+
+        .overlay-card.admin-card .admin-sub {
+            margin: 0 0 16px;
+            font-size: 0.95rem;
+            color: #8D6E63;
+            text-align: center;
+            line-height: 1.35;
+        }
+
+        .admin-close {
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            width: 36px;
+            height: 36px;
+            border: none;
+            border-radius: 50%;
+            background: #F5F5F5;
+            color: #8D6E63;
+            font-family: inherit;
+            font-size: 1.1rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .admin-close:hover { background: #EEEEEE; color: #5D4037; }
+
+        .admin-quiz-q {
+            margin: 0 0 14px;
+            font-size: clamp(1.15rem, 4vw, 1.4rem);
+            color: #5D4037;
+            text-align: center;
+            line-height: 1.4;
+        }
+
+        .admin-quiz-q strong {
+            color: #E65100;
+            font-size: 1.15em;
+        }
+
+        .admin-form-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 8px;
+            margin-bottom: 8px;
+        }
+
+        .admin-form-row input[type="text"],
+        .admin-form-row input[type="number"] {
+            flex: 1 1 0;
+            min-width: 0;
+            max-width: none;
+            width: auto;
+            text-align: left;
+            padding: 12px 14px;
+            font-size: 16px;
+            border: 3px solid var(--sky);
+            border-radius: 16px;
+            outline: none;
+            font-family: inherit;
+            color: var(--ink);
+            background: #FAFAFA;
+        }
+
+        .admin-form-row input[type="text"]:focus,
+        .admin-form-row input[type="number"]:focus {
+            border-color: #4FC3F7;
+            box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.25);
+            background: #fff;
+        }
+
+        .admin-form-row .reward-name-input { flex: 1.4 1 120px; }
+        .admin-form-row .reward-cost-input { flex: 0.9 1 88px; }
+
+        .admin-form-row .btn-add-reward {
+            flex: 0 0 auto;
+            margin-top: 0;
+            width: auto;
+            max-width: none;
+            padding: 10px 14px;
+            font-size: 0.95rem;
+            min-height: 48px;
+            background: #FF8A65;
+            color: #fff;
+            box-shadow: 0 4px 12px rgba(255, 138, 101, 0.35);
+            border: none;
+            border-radius: 16px;
+            font-family: inherit;
+            cursor: pointer;
+        }
+
+        .admin-form-row .btn-add-reward:hover { transform: scale(1.03); }
+
+        .admin-error {
+            min-height: 1.2em;
+            margin: 0 0 10px;
+            font-size: 0.9rem;
+            color: #E53935;
+            text-align: center;
+        }
+
+        .admin-list-label {
+            margin: 12px 0 8px;
+            font-size: 1rem;
+            color: #6D4C41;
+        }
+
+        .admin-reward-list {
+            list-style: none;
+            margin: 0;
+            padding: 0;
+            max-height: min(28vh, 180px);
+            overflow-y: auto;
+            border: 3px dashed #FFCCBC;
+            border-radius: 18px;
+            background: #FFF8F3;
+        }
+
+        .admin-reward-list:empty::after {
+            content: '아직 등록된 보상이 없어요';
+            display: block;
+            padding: 20px 14px;
+            text-align: center;
+            color: #A1887F;
+            font-size: 0.95rem;
+        }
+
+        #claimedRewardList {
+            border-color: #A5D6A7;
+            background: #F1F8E9;
+        }
+
+        #claimedRewardList:empty::after {
+            content: '아직 받은 보상이 없어요';
+        }
+
+        .admin-reward-item.claimed .reward-cost {
+            color: #558B2F;
+        }
+
+        .admin-reward-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            padding: 12px 12px 12px 14px;
+            border-bottom: 2px dashed #FFE0B2;
+        }
+
+        .admin-reward-item:last-child { border-bottom: none; }
+
+        .admin-reward-item .reward-info {
+            flex: 1;
+            min-width: 0;
+            text-align: left;
+        }
+
+        .admin-reward-item .reward-title {
+            display: block;
+            font-size: 1.05rem;
+            color: #5D4037;
+            word-break: keep-all;
+        }
+
+        .admin-reward-item .reward-cost {
+            display: block;
+            margin-top: 2px;
+            font-size: 0.9rem;
+            color: #EF6C00;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .admin-reward-item .btn-del-reward {
+            flex-shrink: 0;
+            width: 36px;
+            height: 36px;
+            border: 2px solid #EF9A9A;
+            border-radius: 10px;
+            background: #FFEBEE;
+            color: #C62828;
+            font-family: inherit;
+            font-size: 0.95rem;
+            cursor: pointer;
+            line-height: 1;
+        }
+
+        .admin-reward-item .btn-del-reward:hover {
+            background: #FFCDD2;
+        }
+
+        .admin-quiz-actions {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 12px;
+        }
+
+        .admin-quiz-actions .btn {
+            width: auto;
+            max-width: none;
+            margin-top: 0;
+            min-width: 120px;
+        }
+
+        .admin-quiz-actions .btn-ghost {
+            color: #8D6E63;
+        }
+
         /* ── Stage 2: 그림 매칭 ── */
         .match-picture-wrap {
             width: 100%;
@@ -745,11 +1199,84 @@
         .coming-soon .icon { font-size: 3rem; margin-bottom: 8px; }
 
         /* ── Stage 3: 철자 완성 ── */
+        .spell-hint-wrap {
+            position: relative;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: 12px 0 14px;
+            min-height: clamp(3.2rem, 12vw, 4.2rem);
+            width: 100%;
+        }
+
         .spell-hint-pic {
             font-size: clamp(2.8rem, 12vw, 4rem);
             line-height: 1;
-            margin: 4px 0 14px;
+            margin: 0;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+        }
+
+        /* 오답 응원 — 이미지 위, 진행 방해 없음 */
+        .spell-cheer {
+            position: absolute;
+            bottom: calc(100% - 4px);
+            left: 50%;
+            transform: translateX(-50%) translateY(6px) scale(0.92);
+            z-index: 6;
+            max-width: min(92%, 320px);
+            padding: 8px 14px;
+            border-radius: 16px;
+            background: linear-gradient(180deg, #FFF8E1 0%, #FFE0B2 100%);
+            border: 2px solid #FFB74D;
+            color: #E65100;
+            font-size: clamp(0.95rem, 3.2vw, 1.15rem);
+            font-weight: 700;
+            line-height: 1.35;
+            text-align: center;
+            letter-spacing: -0.01em;
+            box-shadow: 0 6px 16px rgba(255, 152, 0, 0.22);
+            pointer-events: none;
+            opacity: 0;
+            visibility: hidden;
+            white-space: normal;
+            word-break: keep-all;
+        }
+
+        .spell-cheer::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 50%;
+            transform: translateX(-50%);
+            border: 7px solid transparent;
+            border-top-color: #FFB74D;
+        }
+
+        .spell-cheer.show {
+            visibility: visible;
+            animation: cheerPop 1.5s ease forwards;
+        }
+
+        @keyframes cheerPop {
+            0% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(8px) scale(0.88);
+            }
+            12% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1.04);
+            }
+            22% {
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            75% {
+                opacity: 1;
+                transform: translateX(-50%) translateY(0) scale(1);
+            }
+            100% {
+                opacity: 0;
+                transform: translateX(-50%) translateY(-4px) scale(0.98);
+            }
         }
 
         .spell-slots {
@@ -913,6 +1440,14 @@
             transform: none;
         }
 
+        .spell-choice.used {
+            opacity: 0.28;
+            filter: grayscale(0.6);
+            box-shadow: none;
+            text-decoration: line-through;
+            pointer-events: none;
+        }
+
         .spell-choice.wrong {
             border-color: #EF5350;
             background: #FFCDD2;
@@ -927,16 +1462,6 @@
                 border-width: 3px;
                 padding: 18px 14px;
             }
-            .balloon-sky { min-height: 300px; }
-            .balloon-grid { min-height: 240px; gap: 12px; }
-            .balloon {
-                width: clamp(100px, 30vw, 130px);
-                height: clamp(118px, 36vw, 152px);
-            }
-            .balloon .bubble {
-                font-size: clamp(2.24rem, 8.8vw, 2.88rem);
-                padding: 10px 12px 14px;
-            }
             .blend-chip {
                 font-size: 2rem;
                 padding: 10px 16px;
@@ -945,7 +1470,7 @@
             }
             .blend-trail {
                 gap: 10px;
-                min-height: 64px;
+                min-height: 56px;
             }
             .match-choices { gap: 10px; }
             .match-choice { min-height: 52px; padding: 12px 8px; }
@@ -959,13 +1484,22 @@
                 height: 52px;
                 font-size: 1.45rem;
             }
+            .admin-form-row .btn-add-reward {
+                width: 100%;
+            }
+            .brand {
+                font-size: 0.92rem;
+            }
         }
     </style>
 </head>
 <body>
 
     <header class="top-bar" role="banner">
-        <button type="button" class="brand" id="brandHomeBtn" title="홈으로">🎈 파닉스 놀이</button>
+        <div class="brand-cluster">
+            <button type="button" class="brand" id="brandHomeBtn" title="홈으로">🎈 파닉스 놀이</button>
+            <button type="button" class="mom-btn" id="momAdminBtn" title="엄마(관리자)">엄마</button>
+        </div>
         <div class="money-badge" id="moneyBadge" title="내가 모은 머니" aria-live="polite">
             <span class="coin" aria-hidden="true">💰</span>
             <span><span class="money-value" id="moneyValue">0</span> 머니</span>
@@ -978,10 +1512,19 @@
             <div class="card stack">
                 <div class="mascot" aria-hidden="true">🐻</div>
                 <h1 class="hero-title">반가워!</h1>
-                <p class="hero-sub">파닉스 놀이를 시작하려면<br>네 이름을 알려줘</p>
-                <label class="field-label" for="nameInput">내 이름</label>
-                <input type="text" id="nameInput" placeholder="예: 민준" maxlength="12"
-                    autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done">
+                <p class="hero-sub name-intro">시작하려면 네 이름을 알려줘</p>
+                <input
+                    type="text"
+                    id="nameInput"
+                    placeholder="이름을 입력하세요"
+                    maxlength="12"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    enterkeyhint="done"
+                    aria-label="이름"
+                >
                 <p class="error-msg" id="nameError" role="alert"></p>
                 <button type="button" class="btn btn-primary" id="saveNameBtn">시작하기! ✨</button>
             </div>
@@ -989,26 +1532,50 @@
 
         <!-- 홈 -->
         <section class="screen" id="screen-home" data-screen="home" aria-label="홈">
-            <div class="card stack">
+            <div class="card stack home-card">
                 <div class="mascot" aria-hidden="true">🎈</div>
-                <h1 class="hero-title">신나는 파닉스 놀이</h1>
-                <p class="hero-sub">이름을 누르면 학습을 시작해요</p>
+                <h1 class="hero-title" id="homeGreeting">친구야! 시작해 볼까?</h1>
+                <p class="hero-sub home-sub">이름을 누르면 학습을 시작해요</p>
                 <button type="button" class="name-chip" id="playerNameBtn" aria-label="학습 시작하기">
                     <span aria-hidden="true">👋</span>
                     <span id="playerNameText">친구</span>
                     <span aria-hidden="true">➡️</span>
                 </button>
-                <p class="hint">이름을 눌러 단어를 입력해 보세요!</p>
-                <button type="button" class="btn btn-ghost" id="changeNameBtn">이름 바꾸기</button>
+                <button type="button" class="btn claim-reward-btn" id="claimRewardBtn">[보상 받기]</button>
+                <button type="button" class="btn btn-ghost home-change-name" id="changeNameBtn">이름 바꾸기</button>
             </div>
         </section>
 
         <!-- 단어 입력 -->
         <section class="screen" id="screen-words" data-screen="words" aria-label="단어 입력">
-            <div class="card stack">
-                <div class="mascot" aria-hidden="true">✏️</div>
-                <h1 class="hero-title">학습할 단어</h1>
-                <p class="hero-sub" id="wordsGreeting">단어를 입력하고 게임을 시작해요!</p>
+            <div class="card stack words-card">
+                <div class="words-mascot" aria-hidden="true">
+                    <svg viewBox="0 0 128 128" xmlns="http://www.w3.org/2000/svg" role="img">
+                        <ellipse cx="64" cy="112" rx="36" ry="8" fill="#E0D5C8" opacity="0.55"/>
+                        <!-- 귀 -->
+                        <ellipse cx="28" cy="48" rx="18" ry="26" fill="#F4A261" transform="rotate(-18 28 48)"/>
+                        <ellipse cx="100" cy="48" rx="18" ry="26" fill="#F4A261" transform="rotate(18 100 48)"/>
+                        <ellipse cx="30" cy="50" rx="10" ry="16" fill="#FFE0B2" transform="rotate(-18 30 50)"/>
+                        <ellipse cx="98" cy="50" rx="10" ry="16" fill="#FFE0B2" transform="rotate(18 98 50)"/>
+                        <!-- 얼굴 -->
+                        <circle cx="64" cy="66" r="40" fill="#FFCC80"/>
+                        <!-- 볼 -->
+                        <circle cx="40" cy="74" r="8" fill="#FFAB91" opacity="0.7"/>
+                        <circle cx="88" cy="74" r="8" fill="#FFAB91" opacity="0.7"/>
+                        <!-- 눈 -->
+                        <circle cx="50" cy="62" r="6" fill="#5D4037"/>
+                        <circle cx="78" cy="62" r="6" fill="#5D4037"/>
+                        <circle cx="52" cy="60" r="2.2" fill="#FFF"/>
+                        <circle cx="80" cy="60" r="2.2" fill="#FFF"/>
+                        <!-- 코/입 -->
+                        <ellipse cx="64" cy="76" rx="7" ry="5.5" fill="#5D4037"/>
+                        <path d="M64 81 Q58 88 50 86" stroke="#5D4037" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <path d="M64 81 Q70 88 78 86" stroke="#5D4037" stroke-width="2.5" fill="none" stroke-linecap="round"/>
+                        <!-- 혀 -->
+                        <ellipse cx="64" cy="90" rx="6" ry="5" fill="#EF9A9A"/>
+                    </svg>
+                </div>
+                <h1 class="hero-title">영어단어를 넣어봐!</h1>
 
                 <label class="field-label" for="wordInput">영어 단어 (띄어쓰기로 여러 개)</label>
                 <input
@@ -1087,7 +1654,10 @@
                     <span class="stage-badge">[3단계 : 메롱메롱~]</span>
                     <span class="progress-text" id="stage3Progress">1 / 1</span>
                 </div>
-                <div class="spell-hint-pic" id="spellHintPic" aria-hidden="true">✏️</div>
+                <div class="spell-hint-wrap">
+                    <div class="spell-cheer" id="spellCheer" role="status" aria-live="polite"></div>
+                    <div class="spell-hint-pic" id="spellHintPic" aria-hidden="true">✏️</div>
+                </div>
 
                 <div class="spell-slots" id="spellSlots" aria-live="polite"></div>
 
@@ -1129,6 +1699,82 @@
         </div>
     </div>
 
+    <!-- 엄마 인증 퀴즈 -->
+    <div class="overlay" id="momQuizOverlay" role="dialog" aria-modal="true" aria-labelledby="momQuizTitle">
+        <div class="overlay-card admin-card">
+            <button type="button" class="admin-close" id="momQuizCloseBtn" aria-label="닫기">×</button>
+            <h2 class="admin-title" id="momQuizTitle">엄마 인증 🧮</h2>
+            <p class="admin-sub">어른만 들어갈 수 있어요. 문제를 풀어 주세요!</p>
+            <p class="admin-quiz-q" id="momQuizQuestion">?</p>
+            <div class="admin-form-row" style="justify-content:center">
+                <input
+                    type="number"
+                    id="momQuizAnswer"
+                    class="reward-cost-input"
+                    inputmode="numeric"
+                    placeholder="정답"
+                    aria-label="퀴즈 정답"
+                    style="flex: 0 1 160px; text-align: center;"
+                >
+            </div>
+            <p class="admin-error" id="momQuizError" role="alert"></p>
+            <div class="admin-quiz-actions">
+                <button type="button" class="btn btn-primary" id="momQuizSubmitBtn">확인</button>
+                <button type="button" class="btn btn-ghost" id="momQuizCancelBtn">취소</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- 엄마 보상 관리 -->
+    <div class="overlay" id="momRewardOverlay" role="dialog" aria-modal="true" aria-labelledby="momRewardTitle">
+        <div class="overlay-card admin-card">
+            <button type="button" class="admin-close" id="momRewardCloseBtn" aria-label="닫기">×</button>
+            <h2 class="admin-title" id="momRewardTitle">🎁 보상 관리</h2>
+            <p class="admin-sub">아이가 모은 머니로 바꿀 보상을 등록해요</p>
+            <div class="admin-form-row">
+                <input
+                    type="text"
+                    id="rewardNameInput"
+                    class="reward-name-input"
+                    placeholder="아이스크림 한 개"
+                    maxlength="40"
+                    autocomplete="off"
+                    aria-label="보상 이름"
+                >
+                <input
+                    type="number"
+                    id="rewardCostInput"
+                    class="reward-cost-input"
+                    placeholder="20000"
+                    inputmode="numeric"
+                    min="1"
+                    aria-label="필요 머니"
+                >
+                <button type="button" class="btn-add-reward" id="rewardAddBtn">[보상추가]</button>
+            </div>
+            <p class="admin-error" id="rewardFormError" role="alert"></p>
+            <p class="admin-list-label">등록된 보상</p>
+            <ul class="admin-reward-list" id="rewardList" aria-label="보상 목록"></ul>
+            <p class="admin-list-label">[받은 보상]</p>
+            <ul class="admin-reward-list" id="claimedRewardList" aria-label="받은 보상 목록"></ul>
+        </div>
+    </div>
+
+    <!-- 아이 보상 교환 -->
+    <div class="overlay" id="rewardShopOverlay" role="dialog" aria-modal="true" aria-labelledby="rewardShopTitle">
+        <div class="overlay-card admin-card shop-card">
+            <button type="button" class="admin-close" id="rewardShopCloseBtn" aria-label="닫기">×</button>
+            <h2 class="admin-title" id="rewardShopTitle">🎁 보상 받기</h2>
+            <p class="admin-sub">받고 싶은 보상을 눌러 보세요!</p>
+            <div class="shop-balance" aria-live="polite">
+                <span aria-hidden="true">💰</span>
+                <span>보유 머니 <strong class="shop-balance-value" id="shopBalanceValue">0</strong></span>
+            </div>
+            <p class="shop-msg" id="rewardShopMsg" role="alert"></p>
+            <ul class="shop-reward-list" id="shopRewardList" aria-label="교환 가능한 보상"></ul>
+        </div>
+    </div>
+
     <script>
         /* =========================================================
          * Storage
@@ -1141,6 +1787,8 @@
                 money: 0,
                 words: [],
                 stage: 'home',
+                rewards: [],
+                claimedRewards: [],
                 progress: {
                     currentWordIndex: 0,
                     matchWordIndex: 0,
@@ -1160,6 +1808,8 @@
                     return {
                         ...defaults(),
                         ...parsed,
+                        rewards: Array.isArray(parsed.rewards) ? parsed.rewards : [],
+                        claimedRewards: Array.isArray(parsed.claimedRewards) ? parsed.claimedRewards : [],
                         progress: { ...defaults().progress, ...(parsed.progress || {}) }
                     };
                 } catch {
@@ -1326,6 +1976,10 @@
                 return ctx;
             }
 
+            /**
+             * 기존 '뿡/팡' 낮은 터짐음 — 오답 전용으로 유지
+             * (mp3 파일이 없어 Web Audio로 생성하던 기존 사운드)
+             */
             function popBang() {
                 const audio = getCtx();
                 if (!audio) return;
@@ -1352,6 +2006,47 @@
                 gain.connect(audio.destination);
                 osc.start(t0);
                 osc.stop(t0 + 0.25);
+            }
+
+            /** 정답 풍선 — 짧고 경쾌한 '띠링!' 벨 */
+            function playSoundCorrect() {
+                const audio = getCtx();
+                if (!audio) return;
+                if (audio.state === 'suspended') audio.resume();
+
+                const t0 = audio.currentTime;
+
+                // 메인 벨 (높은 사인)
+                const bell = audio.createOscillator();
+                const bellGain = audio.createGain();
+                bell.type = 'sine';
+                bell.frequency.setValueAtTime(1046.5, t0); // C6
+                bell.frequency.exponentialRampToValueAtTime(1318.5, t0 + 0.08); // E6
+                bellGain.gain.setValueAtTime(0.0001, t0);
+                bellGain.gain.exponentialRampToValueAtTime(0.32, t0 + 0.012);
+                bellGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.28);
+                bell.connect(bellGain);
+                bellGain.connect(audio.destination);
+                bell.start(t0);
+                bell.stop(t0 + 0.3);
+
+                // 반짝임 (짧게 한 음 더)
+                const sparkle = audio.createOscillator();
+                const sparkleGain = audio.createGain();
+                sparkle.type = 'triangle';
+                sparkle.frequency.setValueAtTime(1568, t0 + 0.06); // G6
+                sparkleGain.gain.setValueAtTime(0.0001, t0 + 0.06);
+                sparkleGain.gain.exponentialRampToValueAtTime(0.14, t0 + 0.08);
+                sparkleGain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.22);
+                sparkle.connect(sparkleGain);
+                sparkleGain.connect(audio.destination);
+                sparkle.start(t0 + 0.06);
+                sparkle.stop(t0 + 0.24);
+            }
+
+            /** 오답 풍선 — 기존의 '뿡' 소리 그대로 */
+            function playSoundWrong() {
+                popBang();
             }
 
             function successChime() {
@@ -1419,7 +2114,7 @@
                 });
             }
 
-            return { popBang, successChime, correctDing, fanfare };
+            return { popBang, playSoundCorrect, playSoundWrong, successChime, correctDing, fanfare };
         })();
 
         /* =========================================================
@@ -1669,6 +2364,7 @@
             const moneyValue = document.getElementById('moneyValue');
             const moneyBadge = document.getElementById('moneyBadge');
             const playerNameText = document.getElementById('playerNameText');
+            const homeGreeting = document.getElementById('homeGreeting');
             const nameInput = document.getElementById('nameInput');
             const nameError = document.getElementById('nameError');
 
@@ -1683,12 +2379,12 @@
             }
 
             function updatePlayerName() {
-                playerNameText.textContent = state.playerName || '친구';
-                nameInput.value = state.playerName || '';
-                const greet = document.getElementById('wordsGreeting');
-                if (greet && state.playerName) {
-                    greet.textContent = `${state.playerName}아(야), 단어를 입력하고 게임을 시작해요!`;
+                const name = state.playerName || '친구';
+                playerNameText.textContent = name;
+                if (homeGreeting) {
+                    homeGreeting.textContent = `${name}야! 시작해 볼까?`;
                 }
+                nameInput.value = state.playerName || '';
             }
 
             function showNameError(msg) {
@@ -1753,6 +2449,345 @@
             }
 
             return { bind };
+        })();
+
+        /* =========================================================
+         * Mom Admin — 수학 퀴즈 + 보상 관리
+         * ========================================================= */
+        const MomAdmin = (() => {
+            const quizOverlay = document.getElementById('momQuizOverlay');
+            const rewardOverlay = document.getElementById('momRewardOverlay');
+            const quizQuestion = document.getElementById('momQuizQuestion');
+            const quizAnswer = document.getElementById('momQuizAnswer');
+            const quizError = document.getElementById('momQuizError');
+            const rewardNameInput = document.getElementById('rewardNameInput');
+            const rewardCostInput = document.getElementById('rewardCostInput');
+            const rewardFormError = document.getElementById('rewardFormError');
+            const rewardList = document.getElementById('rewardList');
+            const claimedList = document.getElementById('claimedRewardList');
+
+            let quizExpected = null;
+
+            function ensureRewards() {
+                if (!Array.isArray(state.rewards)) state.rewards = [];
+                if (!Array.isArray(state.claimedRewards)) state.claimedRewards = [];
+            }
+
+            function openOverlay(el) {
+                el.classList.add('show');
+            }
+
+            function closeOverlay(el) {
+                el.classList.remove('show');
+            }
+
+            function closeAll() {
+                closeOverlay(quizOverlay);
+                closeOverlay(rewardOverlay);
+                quizExpected = null;
+                quizAnswer.value = '';
+                quizError.textContent = '';
+                rewardFormError.textContent = '';
+            }
+
+            function openQuiz() {
+                closeOverlay(rewardOverlay);
+                const n = 3 + Math.floor(Math.random() * 7); // 3~9
+                quizExpected = n * n;
+                quizQuestion.innerHTML = `<strong>${n}</strong>의 제곱은 얼마일까요?`;
+                quizAnswer.value = '';
+                quizError.textContent = '';
+                openOverlay(quizOverlay);
+                requestAnimationFrame(() => quizAnswer.focus());
+            }
+
+            function submitQuiz() {
+                const raw = quizAnswer.value.trim();
+                const answer = Number(raw);
+                if (raw === '' || !Number.isFinite(answer)) {
+                    quizError.textContent = '숫자를 입력해 주세요.';
+                    quizAnswer.focus();
+                    return;
+                }
+                if (answer !== quizExpected) {
+                    quizError.textContent = '';
+                    alert('정답이 아니에요. 아이는 들어갈 수 없어요!');
+                    quizAnswer.value = '';
+                    closeOverlay(quizOverlay);
+                    quizExpected = null;
+                    return;
+                }
+                closeOverlay(quizOverlay);
+                quizExpected = null;
+                openRewardPanel();
+            }
+
+            function openRewardPanel() {
+                ensureRewards();
+                rewardNameInput.value = '';
+                rewardCostInput.value = '';
+                rewardFormError.textContent = '';
+                refreshLists();
+                openOverlay(rewardOverlay);
+                requestAnimationFrame(() => rewardNameInput.focus());
+            }
+
+            function formatCost(n) {
+                return Number(n).toLocaleString('ko-KR');
+            }
+
+            function escapeHtml(str) {
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            function makeListItem(item, { claimed = false } = {}) {
+                const li = document.createElement('li');
+                li.className = 'admin-reward-item' + (claimed ? ' claimed' : '');
+                li.dataset.id = item.id;
+
+                const info = document.createElement('div');
+                info.className = 'reward-info';
+                info.innerHTML = `
+                    <span class="reward-title">${escapeHtml(item.name)}</span>
+                    <span class="reward-cost">💰 ${formatCost(item.cost)} 머니</span>
+                `;
+
+                const del = document.createElement('button');
+                del.type = 'button';
+                del.className = 'btn-del-reward';
+                del.setAttribute('aria-label', `${item.name} 삭제`);
+                del.textContent = '[x]';
+                del.addEventListener('click', () => {
+                    if (claimed) removeClaimedReward(item.id);
+                    else removeReward(item.id);
+                });
+
+                li.appendChild(info);
+                li.appendChild(del);
+                return li;
+            }
+
+            function renderAvailableList() {
+                ensureRewards();
+                rewardList.innerHTML = '';
+                state.rewards.forEach(item => {
+                    rewardList.appendChild(makeListItem(item, { claimed: false }));
+                });
+            }
+
+            function renderClaimedList() {
+                ensureRewards();
+                claimedList.innerHTML = '';
+                state.claimedRewards.forEach(item => {
+                    claimedList.appendChild(makeListItem(item, { claimed: true }));
+                });
+            }
+
+            function refreshLists() {
+                renderAvailableList();
+                renderClaimedList();
+            }
+
+            function addReward() {
+                ensureRewards();
+                const name = rewardNameInput.value.trim();
+                const costRaw = rewardCostInput.value.trim();
+                const cost = Number(costRaw);
+
+                if (!name) {
+                    rewardFormError.textContent = '보상 이름을 입력해 주세요.';
+                    rewardNameInput.focus();
+                    return;
+                }
+                if (costRaw === '' || !Number.isFinite(cost) || cost <= 0 || !Number.isInteger(cost)) {
+                    rewardFormError.textContent = '머니는 1 이상의 정수로 입력해 주세요.';
+                    rewardCostInput.focus();
+                    return;
+                }
+
+                state.rewards.push({
+                    id: `r-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+                    name,
+                    cost
+                });
+                persist();
+                rewardNameInput.value = '';
+                rewardCostInput.value = '';
+                rewardFormError.textContent = '';
+                renderAvailableList();
+                rewardNameInput.focus();
+            }
+
+            function removeReward(id) {
+                ensureRewards();
+                state.rewards = state.rewards.filter(r => r.id !== id);
+                persist();
+                renderAvailableList();
+            }
+
+            function removeClaimedReward(id) {
+                ensureRewards();
+                state.claimedRewards = state.claimedRewards.filter(r => r.id !== id);
+                persist();
+                renderClaimedList();
+            }
+
+            function bind() {
+                document.getElementById('momAdminBtn').addEventListener('click', openQuiz);
+                document.getElementById('momQuizSubmitBtn').addEventListener('click', submitQuiz);
+                document.getElementById('momQuizCancelBtn').addEventListener('click', closeAll);
+                document.getElementById('momQuizCloseBtn').addEventListener('click', closeAll);
+                document.getElementById('momRewardCloseBtn').addEventListener('click', closeAll);
+                document.getElementById('rewardAddBtn').addEventListener('click', addReward);
+
+                quizAnswer.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') submitQuiz();
+                });
+                rewardNameInput.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        rewardCostInput.focus();
+                    }
+                });
+                rewardCostInput.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') {
+                        e.preventDefault();
+                        addReward();
+                    }
+                });
+
+                quizOverlay.addEventListener('click', e => {
+                    if (e.target === quizOverlay) closeAll();
+                });
+                rewardOverlay.addEventListener('click', e => {
+                    if (e.target === rewardOverlay) closeAll();
+                });
+            }
+
+            return { bind, refreshList: refreshLists };
+        })();
+
+        /* =========================================================
+         * Reward Shop — 아이 보상 교환
+         * ========================================================= */
+        const RewardShop = (() => {
+            const overlay = document.getElementById('rewardShopOverlay');
+            const listEl = document.getElementById('shopRewardList');
+            const balanceEl = document.getElementById('shopBalanceValue');
+            const msgEl = document.getElementById('rewardShopMsg');
+
+            let msgTimer = null;
+
+            function ensureRewards() {
+                if (!Array.isArray(state.rewards)) state.rewards = [];
+                if (!Array.isArray(state.claimedRewards)) state.claimedRewards = [];
+            }
+
+            function formatCost(n) {
+                return Number(n).toLocaleString('ko-KR');
+            }
+
+            function escapeHtml(str) {
+                return String(str)
+                    .replace(/&/g, '&amp;')
+                    .replace(/</g, '&lt;')
+                    .replace(/>/g, '&gt;')
+                    .replace(/"/g, '&quot;');
+            }
+
+            function setMsg(text, ok = false) {
+                msgEl.textContent = text || '';
+                msgEl.classList.toggle('is-ok', !!ok && !!text);
+                if (msgTimer) clearTimeout(msgTimer);
+                if (text) {
+                    msgTimer = setTimeout(() => {
+                        msgEl.textContent = '';
+                        msgEl.classList.remove('is-ok');
+                        msgTimer = null;
+                    }, 2200);
+                }
+            }
+
+            function updateBalance() {
+                balanceEl.textContent = formatCost(state.money || 0);
+            }
+
+            function renderList() {
+                ensureRewards();
+                listEl.innerHTML = '';
+                state.rewards.forEach(item => {
+                    const li = document.createElement('li');
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'shop-reward-btn';
+                    btn.dataset.id = item.id;
+                    btn.innerHTML = `
+                        <span class="shop-reward-name">${escapeHtml(item.name)}</span>
+                        <span class="shop-reward-cost">💰 ${formatCost(item.cost)}</span>
+                    `;
+                    btn.setAttribute('aria-label', `${item.name}, ${formatCost(item.cost)} 머니`);
+                    btn.addEventListener('click', () => redeem(item.id));
+                    li.appendChild(btn);
+                    listEl.appendChild(li);
+                });
+            }
+
+            function open() {
+                setMsg('');
+                updateBalance();
+                renderList();
+                overlay.classList.add('show');
+            }
+
+            function close() {
+                overlay.classList.remove('show');
+                setMsg('');
+            }
+
+            function redeem(id) {
+                ensureRewards();
+                const item = state.rewards.find(r => r.id === id);
+                if (!item) {
+                    renderList();
+                    return;
+                }
+
+                if ((state.money || 0) < item.cost) {
+                    setMsg('머니가 부족해요!', false);
+                    return;
+                }
+
+                const name = item.name;
+                const cost = item.cost;
+                state.rewards = state.rewards.filter(r => r.id !== id);
+                state.claimedRewards.push({
+                    id: `c-${Date.now()}-${Math.random().toString(36).slice(2, 7)}`,
+                    name: item.name,
+                    cost: item.cost,
+                    claimedAt: Date.now()
+                });
+                setMoney(state.money - cost);
+                updateBalance();
+                renderList();
+                if (typeof MomAdmin !== 'undefined' && MomAdmin.refreshList) {
+                    MomAdmin.refreshList();
+                }
+                setMsg(`${name} 받았어요! 🎉`, true);
+            }
+
+            function bind() {
+                document.getElementById('claimRewardBtn').addEventListener('click', open);
+                document.getElementById('rewardShopCloseBtn').addEventListener('click', close);
+                overlay.addEventListener('click', e => {
+                    if (e.target === overlay) close();
+                });
+            }
+
+            return { bind, open, close };
         })();
 
         /* =========================================================
@@ -1952,50 +2987,45 @@
             function onBalloonTap(btn, item) {
                 if (roundLocked || btn.classList.contains('burst')) return;
 
-                if (item.kind === 'trap') {
-                    handleTrap(btn);
+                // 함정 / 순서 틀림 → 오답음
+                if (item.kind === 'trap' || item.order !== nextIndex) {
+                    playSoundWrong();
+                    btn.classList.remove('is-pressed');
+                    btn.classList.add('wrong-shake');
+                    setTimeout(() => btn.classList.remove('wrong-shake'), 450);
                     return;
                 }
 
-                if (item.order !== nextIndex) {
-                    handleWrongOrder(btn);
-                    return;
-                }
-
-                roundLocked = true;
+                // 정답 순서 → 경쾌한 팡!
+                playSoundCorrect();
                 btn.dataset.consumed = '1';
                 btn.classList.add('burst');
                 nextIndex += 1;
                 renderTrail();
-                TTS.speak(item.text);
 
-                Feedback.flashCorrect(() => {
-                    if (nextIndex >= tokens.length) {
-                        finishWord();
-                    } else {
-                        roundLocked = false;
-                    }
-                });
+                if (nextIndex >= tokens.length) {
+                    roundLocked = true;
+                    finishWord();
+                }
             }
 
-            function handleTrap(btn) {
-                SFX.popBang();
-                btn.classList.remove('is-pressed');
-                btn.classList.add('wrong-shake');
-                setTimeout(() => btn.classList.remove('wrong-shake'), 450);
-                TTS.speak('bang', { rate: 1, pitch: 0.8 });
+            function playSoundCorrect() {
+                SFX.playSoundCorrect();
             }
 
-            function handleWrongOrder(btn) {
-                SFX.popBang();
-                btn.classList.remove('is-pressed');
-                btn.classList.add('wrong-shake');
-                setTimeout(() => btn.classList.remove('wrong-shake'), 450);
+            function playSoundWrong() {
+                SFX.playSoundWrong();
             }
 
             async function finishWord() {
-                await TTS.speak(currentWord);
+                // 단어 완성 시에만 [정답!] + 전체 단어 TTS
+                const speakDone = TTS.speak(currentWord);
+                await Feedback.flashCorrect();
+                await speakDone;
                 addMoney(REWARD.WORD_CLEAR);
+
+                // 팝업·음성 후 짧은 대기 → 다음으로
+                await new Promise(r => setTimeout(r, 450));
 
                 const words = currentWords();
                 const idx = state.progress.currentWordIndex;
@@ -2264,17 +3294,59 @@
             const choicesEl = document.getElementById('spellChoices');
             const progressEl = document.getElementById('stage3Progress');
             const hintPic = document.getElementById('spellHintPic');
+            const cheerEl = document.getElementById('spellCheer');
 
             const TRAP_POOL = 'abcdefghijklmnopqrstuvwxyz'.split('');
+            const CHEER_MESSAGES = [
+                name => `${name} 힘을 내!`,
+                name => `${name} 할 수 있어!❤️`,
+                () => '괜찮아~😊 힌트줄까?',
+                () => '엄마한테 도움을 요청해 봐!'
+            ];
 
             let currentWord = '';
             let blankLevel = 1;
             let blankSet = new Set();
             let filled = new Set();
+            let choiceLetters = []; // 라운드 시작 시 고정된 보기 알파벳
             let busy = false;
+            let wrongCount = 0;
+            let cheerHideTimer = null;
 
             function currentWords() {
                 return state.words || [];
+            }
+
+            function resetWrongCount() {
+                wrongCount = 0;
+            }
+
+            function hideCheer() {
+                if (cheerHideTimer) {
+                    clearTimeout(cheerHideTimer);
+                    cheerHideTimer = null;
+                }
+                cheerEl.classList.remove('show');
+                cheerEl.textContent = '';
+            }
+
+            function showCheer() {
+                wrongCount += 1;
+                const name = state.playerName || '친구';
+                const idx = (wrongCount - 1) % CHEER_MESSAGES.length;
+                const msg = CHEER_MESSAGES[idx](name);
+
+                cheerEl.classList.remove('show');
+                // 연속 오답 시 애니메이션 재시작
+                void cheerEl.offsetWidth;
+                cheerEl.textContent = msg;
+                cheerEl.classList.add('show');
+
+                if (cheerHideTimer) clearTimeout(cheerHideTimer);
+                cheerHideTimer = setTimeout(() => {
+                    cheerEl.classList.remove('show');
+                    cheerHideTimer = null;
+                }, 1500);
             }
 
             function pickBlankPositions(length, count) {
@@ -2331,25 +3403,33 @@
                 });
             }
 
+            function buildChoiceLetters() {
+                // 빈칸에 필요한 글자(중복 그대로 포함) + 함정 2~3개 → 한 번만 섞어 고정
+                const needed = [...blankSet]
+                    .sort((a, b) => a - b)
+                    .map(i => currentWord[i]);
+                const traps = buildTrapLetters(needed);
+                return Phonics.shuffle([...needed, ...traps]);
+            }
+
             function renderChoices() {
                 choicesEl.innerHTML = '';
-                const needed = [...blankSet]
-                    .filter(i => !filled.has(i))
-                    .map(i => currentWord[i]);
-
-                const uniqueNeeded = [...new Set(needed)];
-                const traps = buildTrapLetters(uniqueNeeded);
-                const options = Phonics.shuffle([...uniqueNeeded, ...traps]);
-
-                options.forEach(letter => {
+                choiceLetters.forEach((letter, idx) => {
                     const btn = document.createElement('button');
                     btn.type = 'button';
                     btn.className = 'spell-choice';
                     btn.textContent = letter;
+                    btn.dataset.choiceIndex = String(idx);
                     btn.setAttribute('aria-label', `글자 ${letter}`);
                     btn.addEventListener('click', () => onChoice(btn, letter));
                     choicesEl.appendChild(btn);
                 });
+            }
+
+            function markChoiceUsed(btn) {
+                btn.disabled = true;
+                btn.classList.add('used');
+                btn.setAttribute('aria-disabled', 'true');
             }
 
             function setupLevel(word, level) {
@@ -2358,6 +3438,7 @@
                 blankSet = pickBlankPositions(word.length, blankLevel);
                 filled = new Set();
                 busy = false;
+                choiceLetters = buildChoiceLetters();
 
                 state.progress.spellBlankLevel = blankLevel;
                 persist();
@@ -2376,6 +3457,8 @@
                 const idx = Math.min(Math.max(0, wordIndex), words.length - 1);
                 state.progress.spellWordIndex = idx;
                 persist();
+                hideCheer();
+                resetWrongCount();
                 setupLevel(words[idx], level);
             }
 
@@ -2396,38 +3479,41 @@
 
                 const expected = currentWord[target];
                 if (letter.toLowerCase() !== expected.toLowerCase()) {
-                    SFX.popBang();
+                    SFX.playSoundWrong();
                     btn.classList.add('wrong');
                     shakeActiveBlank();
+                    showCheer();
                     setTimeout(() => btn.classList.remove('wrong'), 450);
                     return;
                 }
 
-                busy = true;
+                // 개별 정답: 글자 채움 + 경쾌한 효과음만 (보기 목록은 고정 유지)
+                SFX.playSoundCorrect();
                 filled.add(target);
-                TTS.speak(letter);
+                markChoiceUsed(btn);
                 renderSlots();
 
-                await Feedback.flashCorrect();
-
                 if (filled.size >= blankSet.size) {
+                    busy = true;
+                    resetWrongCount();
+                    hideCheer();
                     [...choicesEl.querySelectorAll('.spell-choice')].forEach(b => { b.disabled = true; });
                     await finishLevel();
-                } else {
-                    renderChoices();
-                    busy = false;
                 }
             }
 
             async function finishLevel() {
-                await TTS.speak(currentWord);
+                // 단어(현재 빈칸 세트) 완성 시에만 [정답!] + 전체 TTS — 1단계와 동일
+                const speakDone = TTS.speak(currentWord);
+                await Feedback.flashCorrect();
+                await speakDone;
+                await new Promise(r => setTimeout(r, 450));
 
                 const n = currentWord.length;
                 const words = currentWords();
                 const wi = state.progress.spellWordIndex || 0;
 
                 if (blankLevel < n) {
-                    // 같은 스테이지 안 — 빈칸 난이도 업: 자동 진행
                     setupLevel(currentWord, blankLevel + 1);
                     busy = false;
                     return;
@@ -2451,7 +3537,6 @@
                         }
                     });
                 } else {
-                    // 다음 단어 — 단계 내부 자동
                     state.progress.spellWordIndex = wi + 1;
                     state.progress.spellBlankLevel = 1;
                     persist();
@@ -2480,6 +3565,8 @@
             UI.updateMoney();
             UI.updatePlayerName();
             Home.bind();
+            MomAdmin.bind();
+            RewardShop.bind();
             WordsScreen.bind();
             Stage1.bind();
             Stage2.bind();
@@ -2501,7 +3588,9 @@
             Stage2,
             Stage3,
             WordsScreen,
-            WordPictures
+            WordPictures,
+            MomAdmin,
+            RewardShop
         };
     </script>
 </body>
