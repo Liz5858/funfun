@@ -1,0 +1,1695 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>🐻 신나는 파닉스 놀이 🎈</title>
+    <link href="https://fonts.googleapis.com/css2?family=Jua&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --bg: #FFF6E9;
+            --ink: #5D4037;
+            --accent: #FF8A65;
+            --card: #FFFFFF;
+            --dash: #FFCCBC;
+            --btn: #FFB74D;
+            --sky: #81D4FA;
+            --money: #FFD54F;
+            --safe-bottom: env(safe-area-inset-bottom, 0px);
+            --balloon-good: #4FC3F7;
+            --balloon-trap: #FF7043;
+        }
+
+        *, *::before, *::after { box-sizing: border-box; }
+
+        body {
+            margin: 0;
+            min-height: 100dvh;
+            font-family: 'Jua', sans-serif;
+            background:
+                radial-gradient(circle at 12% 18%, #FFE0B2 0%, transparent 42%),
+                radial-gradient(circle at 88% 12%, #B3E5FC 0%, transparent 38%),
+                var(--bg);
+            color: var(--ink);
+            display: flex;
+            flex-direction: column;
+        }
+
+        .top-bar {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 12px;
+            padding: 12px 16px;
+            padding-top: max(12px, env(safe-area-inset-top));
+            background: rgba(255, 255, 255, 0.85);
+            backdrop-filter: blur(8px);
+            border-bottom: 3px dashed var(--dash);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .brand {
+            font-size: clamp(1rem, 3.5vw, 1.25rem);
+            color: var(--accent);
+            white-space: nowrap;
+            background: none;
+            border: none;
+            font-family: inherit;
+            cursor: pointer;
+            padding: 0;
+        }
+
+        .money-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: linear-gradient(180deg, #FFF8E1, #FFECB3);
+            border: 3px solid var(--money);
+            border-radius: 999px;
+            padding: 6px 14px 6px 8px;
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            box-shadow: 0 3px 10px rgba(255, 193, 7, 0.25);
+        }
+
+        .money-badge .coin {
+            width: 28px;
+            height: 28px;
+            border-radius: 50%;
+            background: radial-gradient(circle at 30% 30%, #FFF59D, #FFC107 55%, #FF8F00);
+            display: grid;
+            place-items: center;
+            font-size: 0.85rem;
+            border: 2px solid #FFB300;
+            flex-shrink: 0;
+        }
+
+        .money-badge .money-value {
+            min-width: 1.5ch;
+            font-variant-numeric: tabular-nums;
+        }
+
+        .money-badge.pop { animation: moneyPop 0.45s ease; }
+
+        @keyframes moneyPop {
+            0% { transform: scale(1); }
+            40% { transform: scale(1.12); }
+            100% { transform: scale(1); }
+        }
+
+        .screens {
+            flex: 1;
+            width: 100%;
+            max-width: 720px;
+            margin: 0 auto;
+            padding: 24px 16px calc(24px + var(--safe-bottom));
+        }
+
+        .screen {
+            display: none;
+            animation: fadeIn 0.35s ease;
+        }
+
+        .screen.active { display: block; }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(8px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .card {
+            background: var(--card);
+            border-radius: 28px;
+            padding: clamp(20px, 5vw, 36px);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.08);
+            border: 4px dashed var(--dash);
+            text-align: center;
+        }
+
+        .hero-title {
+            margin: 0 0 8px;
+            font-size: clamp(1.6rem, 6vw, 2.6rem);
+            color: var(--accent);
+            text-shadow: 2px 2px #FFE0B2;
+            line-height: 1.2;
+        }
+
+        .hero-sub {
+            margin: 0 0 20px;
+            font-size: clamp(1rem, 3.5vw, 1.2rem);
+            color: #8D6E63;
+            line-height: 1.4;
+        }
+
+        .mascot {
+            font-size: clamp(3rem, 12vw, 4.5rem);
+            line-height: 1;
+            margin-bottom: 8px;
+            animation: bounceSoft 2.4s ease-in-out infinite;
+        }
+
+        @keyframes bounceSoft {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-8px); }
+        }
+
+        label.field-label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 1.15rem;
+            color: #6D4C41;
+        }
+
+        /* 모바일 줌 방지: 16px 이상 */
+        input[type="text"] {
+            width: 100%;
+            max-width: 420px;
+            padding: 14px 16px;
+            font-size: 18px;
+            border: 3px solid var(--sky);
+            border-radius: 18px;
+            outline: none;
+            text-align: center;
+            font-family: 'Jua', sans-serif;
+            color: var(--ink);
+            background: #FAFAFA;
+        }
+
+        input[type="text"]:focus {
+            border-color: #4FC3F7;
+            box-shadow: 0 0 0 4px rgba(79, 195, 247, 0.25);
+            background: #fff;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            border: none;
+            cursor: pointer;
+            font-family: 'Jua', sans-serif;
+            border-radius: 24px;
+            padding: 14px 28px;
+            font-size: clamp(1.05rem, 3.5vw, 1.3rem);
+            transition: transform 0.15s, box-shadow 0.15s;
+            min-height: 48px;
+        }
+
+        .btn:active { transform: scale(0.97); }
+        .btn:disabled {
+            opacity: 0.5;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-primary {
+            background: var(--btn);
+            color: #fff;
+            box-shadow: 0 5px 15px rgba(255, 183, 77, 0.4);
+            width: 100%;
+            max-width: 300px;
+            margin-top: 14px;
+        }
+
+        .btn-primary:hover:not(:disabled) { transform: scale(1.03); }
+
+        .btn-secondary {
+            background: #81D4FA;
+            color: #01579B;
+            box-shadow: 0 5px 15px rgba(129, 212, 250, 0.35);
+            width: 100%;
+            max-width: 300px;
+            margin-top: 10px;
+        }
+
+        .btn-ghost {
+            background: transparent;
+            color: #A1887F;
+            font-size: 0.95rem;
+            padding: 8px 12px;
+            margin-top: 8px;
+        }
+
+        .name-chip {
+            display: inline-flex;
+            align-items: center;
+            gap: 10px;
+            background: #F3E5F5;
+            border: 3px solid #CE93D8;
+            border-radius: 999px;
+            padding: 12px 22px;
+            font-size: clamp(1.35rem, 5vw, 1.9rem);
+            color: #6A1B9A;
+            cursor: pointer;
+            transition: transform 0.15s, box-shadow 0.15s;
+            box-shadow: 0 4px 14px rgba(186, 104, 200, 0.25);
+            margin: 8px 0 16px;
+            font-family: inherit;
+        }
+
+        .name-chip:hover {
+            transform: scale(1.05);
+            box-shadow: 0 6px 18px rgba(186, 104, 200, 0.35);
+        }
+
+        .hint { margin: 0; font-size: 1rem; color: #A1887F; }
+        .error-msg {
+            color: #E53935;
+            font-size: 0.95rem;
+            min-height: 1.4em;
+            margin: 8px 0 0;
+        }
+
+        .stack {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+        }
+
+        .nav-row {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            width: 100%;
+            margin-top: 8px;
+        }
+
+        .word-chips {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 16px;
+            min-height: 2rem;
+            width: 100%;
+        }
+
+        .word-chip {
+            background: #E8F5E9;
+            border: 2px solid #81C784;
+            color: #2E7D32;
+            border-radius: 999px;
+            padding: 6px 14px;
+            font-size: 1rem;
+        }
+
+        /* ── Stage 1: 풍선 ── */
+        .stage-header {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: center;
+            justify-content: space-between;
+            gap: 8px;
+            margin-bottom: 12px;
+            width: 100%;
+        }
+
+        .stage-badge {
+            background: #E3F2FD;
+            color: #1565C0;
+            border: 2px solid #90CAF9;
+            border-radius: 999px;
+            padding: 4px 12px;
+            font-size: 0.95rem;
+        }
+
+        .progress-text {
+            font-size: 1rem;
+            color: #8D6E63;
+        }
+
+        .target-word {
+            font-size: clamp(1.5rem, 5vw, 2rem);
+            color: #5E35B1;
+            margin: 4px 0 8px;
+            letter-spacing: 0.08em;
+        }
+
+        .guide-text {
+            margin: 0 0 16px;
+            font-size: 1.05rem;
+            color: #8D6E63;
+        }
+
+        .balloon-sky {
+            position: relative;
+            width: 100%;
+            min-height: 280px;
+            background:
+                linear-gradient(180deg, #E1F5FE 0%, #B3E5FC 55%, #E0F7FA 100%);
+            border-radius: 24px;
+            border: 3px solid #81D4FA;
+            overflow: hidden;
+            padding: 16px 8px 24px;
+        }
+
+        .balloon-grid {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: clamp(10px, 3vw, 18px);
+            min-height: 220px;
+        }
+
+        .balloon {
+            --b-color: var(--balloon-good);
+            width: clamp(64px, 18vw, 86px);
+            height: clamp(76px, 21vw, 100px);
+            border: none;
+            background: transparent;
+            padding: 0;
+            cursor: pointer;
+            position: relative;
+            font-family: inherit;
+            animation: floatY 2.8s ease-in-out infinite;
+            touch-action: manipulation;
+        }
+
+        .balloon:nth-child(2n) { animation-duration: 3.2s; animation-delay: -0.4s; }
+        .balloon:nth-child(3n) { animation-duration: 2.6s; animation-delay: -1s; }
+
+        .balloon .bubble {
+            width: 100%;
+            height: 78%;
+            border-radius: 50% 50% 45% 45%;
+            background: radial-gradient(circle at 30% 28%, #fff 0%, var(--b-color) 42%, color-mix(in srgb, var(--b-color) 70%, #000) 100%);
+            display: grid;
+            place-items: center;
+            color: #fff;
+            font-size: clamp(1.1rem, 4vw, 1.5rem);
+            text-shadow: 0 1px 2px rgba(0,0,0,0.25);
+            box-shadow: inset -4px -8px 12px rgba(0,0,0,0.12), 0 6px 14px rgba(0,0,0,0.12);
+            position: relative;
+        }
+
+        .balloon .bubble::after {
+            content: '';
+            position: absolute;
+            bottom: -8px;
+            left: 50%;
+            transform: translateX(-50%);
+            border-left: 7px solid transparent;
+            border-right: 7px solid transparent;
+            border-top: 10px solid color-mix(in srgb, var(--b-color) 80%, #000);
+        }
+
+        .balloon .string {
+            width: 2px;
+            height: 18%;
+            margin: 10px auto 0;
+            background: #90A4AE;
+        }
+
+        .balloon.is-good { --b-color: #4FC3F7; }
+        .balloon.is-trap { --b-color: #FF7043; }
+        .balloon.is-trap.alt { --b-color: #FFCA28; color: #5D4037; }
+        .balloon.is-trap.alt2 { --b-color: #EC407A; }
+
+        .balloon.burst {
+            pointer-events: none;
+            animation: burstPop 0.45s forwards;
+        }
+
+        .balloon.wrong-shake {
+            animation: shakeX 0.45s ease;
+        }
+
+        @keyframes floatY {
+            0%, 100% { transform: translateY(0); }
+            50% { transform: translateY(-10px); }
+        }
+
+        @keyframes burstPop {
+            0% { transform: scale(1); opacity: 1; }
+            40% { transform: scale(1.35); opacity: 0.9; }
+            100% { transform: scale(0); opacity: 0; }
+        }
+
+        @keyframes shakeX {
+            0%, 100% { transform: translateX(0); }
+            20% { transform: translateX(-8px) rotate(-4deg); }
+            40% { transform: translateX(8px) rotate(4deg); }
+            60% { transform: translateX(-6px); }
+            80% { transform: translateX(6px); }
+        }
+
+        .blend-trail {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            gap: 8px;
+            margin-top: 14px;
+            min-height: 40px;
+        }
+
+        .blend-chip {
+            background: #E8F5E9;
+            border: 2px solid #66BB6A;
+            color: #2E7D32;
+            border-radius: 12px;
+            padding: 6px 12px;
+            font-size: 1.2rem;
+            animation: fadeIn 0.25s ease;
+        }
+
+        /* 축하 오버레이 */
+        .overlay {
+            display: none;
+            position: fixed;
+            inset: 0;
+            background: rgba(93, 64, 55, 0.45);
+            z-index: 200;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .overlay.show { display: flex; }
+
+        .overlay-card {
+            background: #fff;
+            border-radius: 28px;
+            padding: 28px 24px;
+            max-width: 360px;
+            width: 100%;
+            text-align: center;
+            border: 4px dashed #FFCCBC;
+            box-shadow: 0 16px 40px rgba(0,0,0,0.2);
+            animation: fadeIn 0.3s ease;
+        }
+
+        .overlay-card .big { font-size: 3rem; margin-bottom: 8px; }
+
+        /* ── Stage 2: 그림 매칭 ── */
+        .match-picture-wrap {
+            width: 100%;
+            max-width: 320px;
+            margin: 0 auto 16px;
+            aspect-ratio: 1;
+            border-radius: 28px;
+            background:
+                radial-gradient(circle at 30% 25%, #FFF9C4 0%, transparent 45%),
+                linear-gradient(160deg, #E1F5FE, #FCE4EC 55%, #E8F5E9);
+            border: 4px solid #90CAF9;
+            display: grid;
+            place-items: center;
+            position: relative;
+            overflow: hidden;
+            box-shadow: inset 0 -8px 20px rgba(255,255,255,0.4), 0 8px 20px rgba(0,0,0,0.06);
+        }
+
+        .match-picture-wrap .pic-emoji {
+            font-size: clamp(4.5rem, 22vw, 7rem);
+            line-height: 1;
+            filter: drop-shadow(0 6px 10px rgba(0,0,0,0.12));
+            animation: bounceSoft 2.8s ease-in-out infinite;
+            user-select: none;
+        }
+
+        .match-picture-wrap .pic-fallback {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+            padding: 16px;
+        }
+
+        .match-picture-wrap .pic-fallback .letter {
+            width: 96px;
+            height: 96px;
+            border-radius: 28px;
+            display: grid;
+            place-items: center;
+            font-size: 3rem;
+            color: #fff;
+            background: linear-gradient(145deg, #FF8A65, #FFB74D);
+            box-shadow: 0 8px 18px rgba(255, 138, 101, 0.35);
+        }
+
+        .match-picture-wrap .pic-fallback .hint-word {
+            font-size: 1rem;
+            color: #8D6E63;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+        }
+
+        .match-hear-btn {
+            position: absolute;
+            right: 10px;
+            bottom: 10px;
+            border: none;
+            background: rgba(255,255,255,0.9);
+            border-radius: 999px;
+            width: 44px;
+            height: 44px;
+            font-size: 1.3rem;
+            cursor: pointer;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+            font-family: inherit;
+        }
+
+        .match-choices {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+            width: 100%;
+            max-width: 420px;
+            margin: 0 auto;
+        }
+
+        .match-choice {
+            border: 3px solid #CE93D8;
+            background: #F3E5F5;
+            color: #6A1B9A;
+            border-radius: 18px;
+            padding: 14px 10px;
+            font-size: clamp(1.15rem, 4vw, 1.4rem);
+            font-family: inherit;
+            cursor: pointer;
+            transition: transform 0.15s, background 0.15s, border-color 0.15s;
+            min-height: 56px;
+            touch-action: manipulation;
+        }
+
+        .match-choice:hover:not(:disabled) {
+            transform: scale(1.04);
+            background: #E1BEE7;
+        }
+
+        .match-choice.correct {
+            border-color: #66BB6A;
+            background: #C8E6C9;
+            color: #2E7D32;
+        }
+
+        .match-choice.wrong {
+            border-color: #EF5350;
+            background: #FFCDD2;
+            color: #C62828;
+            animation: shakeX 0.45s ease;
+        }
+
+        .match-choice:disabled { cursor: default; opacity: 0.85; }
+
+        .coming-soon { padding: 24px 8px; color: #8D6E63; }
+        .coming-soon .icon { font-size: 3rem; margin-bottom: 8px; }
+
+        @media (max-width: 480px) {
+            .screens { padding: 16px 12px calc(16px + var(--safe-bottom)); }
+            .card {
+                border-radius: 22px;
+                border-width: 3px;
+                padding: 18px 14px;
+            }
+            .balloon-sky { min-height: 240px; }
+            .balloon-grid { min-height: 180px; gap: 10px; }
+            .match-choices { gap: 10px; }
+            .match-choice { min-height: 52px; padding: 12px 8px; }
+        }
+    </style>
+</head>
+<body>
+
+    <header class="top-bar" role="banner">
+        <button type="button" class="brand" id="brandHomeBtn" title="홈으로">🎈 파닉스 놀이</button>
+        <div class="money-badge" id="moneyBadge" title="내가 모은 머니" aria-live="polite">
+            <span class="coin" aria-hidden="true">💰</span>
+            <span><span class="money-value" id="moneyValue">0</span> 머니</span>
+        </div>
+    </header>
+
+    <main class="screens">
+        <!-- 이름 입력 -->
+        <section class="screen" id="screen-name" data-screen="name" aria-label="이름 입력">
+            <div class="card stack">
+                <div class="mascot" aria-hidden="true">🐻</div>
+                <h1 class="hero-title">반가워!</h1>
+                <p class="hero-sub">파닉스 놀이를 시작하려면<br>네 이름을 알려줘</p>
+                <label class="field-label" for="nameInput">내 이름</label>
+                <input type="text" id="nameInput" placeholder="예: 민준" maxlength="12"
+                    autocomplete="off" autocorrect="off" autocapitalize="off" spellcheck="false" enterkeyhint="done">
+                <p class="error-msg" id="nameError" role="alert"></p>
+                <button type="button" class="btn btn-primary" id="saveNameBtn">시작하기! ✨</button>
+            </div>
+        </section>
+
+        <!-- 홈 -->
+        <section class="screen" id="screen-home" data-screen="home" aria-label="홈">
+            <div class="card stack">
+                <div class="mascot" aria-hidden="true">🎈</div>
+                <h1 class="hero-title">신나는 파닉스 놀이</h1>
+                <p class="hero-sub">이름을 누르면 학습을 시작해요</p>
+                <button type="button" class="name-chip" id="playerNameBtn" aria-label="학습 시작하기">
+                    <span aria-hidden="true">👋</span>
+                    <span id="playerNameText">친구</span>
+                    <span aria-hidden="true">➡️</span>
+                </button>
+                <p class="hint">이름을 눌러 단어를 입력해 보세요!</p>
+                <button type="button" class="btn btn-ghost" id="changeNameBtn">이름 바꾸기</button>
+            </div>
+        </section>
+
+        <!-- 단어 입력 -->
+        <section class="screen" id="screen-words" data-screen="words" aria-label="단어 입력">
+            <div class="card stack">
+                <div class="mascot" aria-hidden="true">✏️</div>
+                <h1 class="hero-title">학습할 단어</h1>
+                <p class="hero-sub" id="wordsGreeting">단어를 입력하고 게임을 시작해요!</p>
+
+                <label class="field-label" for="wordInput">영어 단어 (띄어쓰기로 여러 개)</label>
+                <input
+                    type="text"
+                    id="wordInput"
+                    placeholder="예: cake kite sun"
+                    autocomplete="off"
+                    autocorrect="off"
+                    autocapitalize="off"
+                    spellcheck="false"
+                    inputmode="text"
+                    enterkeyhint="done"
+                >
+                <p class="error-msg" id="wordError" role="alert"></p>
+
+                <div class="word-chips" id="wordChips" aria-live="polite"></div>
+
+                <button type="button" class="btn btn-primary" id="startStage1Btn">1단계 시작! 🎈</button>
+                <div class="nav-row">
+                    <button type="button" class="btn btn-ghost" id="wordsBackHomeBtn">홈으로</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 1단계: 소리 조합 -->
+        <section class="screen" id="screen-stage1" data-screen="stage1" aria-label="1단계 소리 조합">
+            <div class="card stack">
+                <div class="stage-header">
+                    <span class="stage-badge">1단계 · 소리 조합</span>
+                    <span class="progress-text" id="stage1Progress">1 / 1</span>
+                </div>
+                <p class="target-word" id="stage1WordLabel">cake</p>
+                <p class="guide-text" id="stage1Guide">파란 풍선을 <strong>순서대로</strong> 터뜨려 보세요!</p>
+
+                <div class="balloon-sky">
+                    <div class="balloon-grid" id="balloonGrid"></div>
+                </div>
+
+                <div class="blend-trail" id="blendTrail" aria-live="polite"></div>
+
+                <div class="nav-row">
+                    <button type="button" class="btn btn-ghost" id="stage1RestartBtn">다시 하기</button>
+                    <button type="button" class="btn btn-ghost" id="stage1ToWordsBtn">단어 다시 고르기</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 2단계: 그림 매칭 -->
+        <section class="screen" id="screen-stage2" data-screen="stage2" aria-label="2단계 그림 매칭">
+            <div class="card stack">
+                <div class="stage-header">
+                    <span class="stage-badge">2단계 · 그림 매칭</span>
+                    <span class="progress-text" id="stage2Progress">1 / 1</span>
+                </div>
+                <p class="guide-text" id="stage2Guide">그림을 보고 알맞은 단어를 골라 보세요!</p>
+
+                <div class="match-picture-wrap" id="matchPicture">
+                    <span class="pic-emoji" id="matchEmoji" aria-hidden="true">🎂</span>
+                    <button type="button" class="match-hear-btn" id="matchHearBtn" title="힌트 듣기" aria-label="힌트 듣기">🔊</button>
+                </div>
+
+                <div class="match-choices" id="matchChoices" role="group" aria-label="단어 선택"></div>
+
+                <div class="nav-row">
+                    <button type="button" class="btn btn-ghost" id="stage2RestartBtn">다시 하기</button>
+                    <button type="button" class="btn btn-ghost" id="stage2ToWordsBtn">단어 다시 고르기</button>
+                    <button type="button" class="btn btn-ghost" id="stage2HomeBtn">홈으로</button>
+                </div>
+            </div>
+        </section>
+
+        <!-- 3단계 placeholder -->
+        <section class="screen" id="screen-stage3" data-screen="stage3" aria-label="3단계 준비 중">
+            <div class="card stack coming-soon">
+                <div class="icon" aria-hidden="true">🚧</div>
+                <h1 class="hero-title">3단계 · 준비 중</h1>
+                <p class="hero-sub">더 재미있는 놀이가<br>곧 찾아올 거예요!</p>
+                <button type="button" class="btn btn-primary" id="stage3SoonHomeBtn">홈으로</button>
+            </div>
+        </section>
+    </main>
+
+    <!-- 축하 오버레이 -->
+    <div class="overlay" id="celebrateOverlay" role="dialog" aria-modal="true" aria-labelledby="celebrateTitle">
+        <div class="overlay-card">
+            <div class="big" id="celebrateEmoji" aria-hidden="true">🎉</div>
+            <h2 class="hero-title" id="celebrateTitle" style="font-size:1.6rem">잘했어!</h2>
+            <p class="hero-sub" id="celebrateMsg" style="margin-bottom:12px"></p>
+            <button type="button" class="btn btn-primary" id="celebrateNextBtn">다음!</button>
+        </div>
+    </div>
+
+    <script>
+        /* =========================================================
+         * Storage
+         * ========================================================= */
+        const Storage = (() => {
+            const KEY = 'phonics-game-v1';
+
+            const defaults = () => ({
+                playerName: '',
+                money: 0,
+                words: [],
+                stage: 'home',
+                progress: {
+                    currentWordIndex: 0,
+                    matchWordIndex: 0,
+                    stage1Done: false,
+                    stage2Done: false
+                }
+            });
+
+            function load() {
+                try {
+                    const raw = localStorage.getItem(KEY);
+                    if (!raw) return defaults();
+                    const parsed = JSON.parse(raw);
+                    return {
+                        ...defaults(),
+                        ...parsed,
+                        progress: { ...defaults().progress, ...(parsed.progress || {}) }
+                    };
+                } catch {
+                    return defaults();
+                }
+            }
+
+            function save(data) {
+                try {
+                    localStorage.setItem(KEY, JSON.stringify(data));
+                } catch (err) {
+                    console.warn('저장 실패:', err);
+                }
+            }
+
+            return { KEY, defaults, load, save };
+        })();
+
+        let state = Storage.load();
+
+        function persist() {
+            Storage.save(state);
+        }
+
+        /* =========================================================
+         * TTS
+         * ========================================================= */
+        const TTS = (() => {
+            const RATE = 0.7;
+            const PITCH = 1.2;
+            let preferredVoice = null;
+
+            function scoreVoice(voice) {
+                const name = voice.name.toLowerCase();
+                let score = 0;
+                if (/en-us|united states|us english/.test(name)) score += 40;
+                else if (/en-gb|united kingdom|uk english/.test(name)) score += 30;
+                else if (/english/.test(name)) score += 20;
+                if (/google|microsoft|natural|neural|premium|samantha|karen|zira|aria/.test(name)) score += 25;
+                if (/female|woman|girl/.test(name)) score += 10;
+                if (voice.localService) score += 5;
+                return score;
+            }
+
+            function initVoices() {
+                if (!('speechSynthesis' in window)) return;
+                const voices = speechSynthesis.getVoices();
+                if (!voices.length) return;
+                const english = voices.filter(v => /^en(-|_)/i.test(v.lang));
+                const pool = english.length ? english : voices;
+                preferredVoice = pool
+                    .map(v => ({ voice: v, score: scoreVoice(v) }))
+                    .sort((a, b) => b.score - a.score)[0]?.voice ?? null;
+            }
+
+            function speak(text, opts = {}) {
+                if (!('speechSynthesis' in window)) return Promise.resolve();
+                return new Promise(resolve => {
+                    speechSynthesis.cancel();
+                    const u = new SpeechSynthesisUtterance(text);
+                    u.lang = 'en-US';
+                    u.rate = opts.rate ?? RATE;
+                    u.pitch = opts.pitch ?? PITCH;
+                    u.volume = 1;
+                    if (preferredVoice) {
+                        u.voice = preferredVoice;
+                        u.lang = preferredVoice.lang;
+                    }
+                    u.onend = () => resolve();
+                    u.onerror = () => resolve();
+                    speechSynthesis.speak(u);
+                });
+            }
+
+            if ('speechSynthesis' in window) {
+                initVoices();
+                speechSynthesis.onvoiceschanged = initVoices;
+            }
+
+            return { speak, initVoices };
+        })();
+
+        /* =========================================================
+         * SFX (팡 소리)
+         * ========================================================= */
+        const SFX = (() => {
+            let ctx = null;
+
+            function getCtx() {
+                if (!ctx) {
+                    const AC = window.AudioContext || window.webkitAudioContext;
+                    if (!AC) return null;
+                    ctx = new AC();
+                }
+                return ctx;
+            }
+
+            function popBang() {
+                const audio = getCtx();
+                if (!audio) return;
+                if (audio.state === 'suspended') audio.resume();
+
+                const t0 = audio.currentTime;
+                const osc = audio.createOscillator();
+                const gain = audio.createGain();
+                const filter = audio.createBiquadFilter();
+
+                osc.type = 'square';
+                osc.frequency.setValueAtTime(180, t0);
+                osc.frequency.exponentialRampToValueAtTime(40, t0 + 0.18);
+
+                filter.type = 'lowpass';
+                filter.frequency.value = 900;
+
+                gain.gain.setValueAtTime(0.0001, t0);
+                gain.gain.exponentialRampToValueAtTime(0.35, t0 + 0.01);
+                gain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.22);
+
+                osc.connect(filter);
+                filter.connect(gain);
+                gain.connect(audio.destination);
+                osc.start(t0);
+                osc.stop(t0 + 0.25);
+            }
+
+            function successChime() {
+                const audio = getCtx();
+                if (!audio) return;
+                if (audio.state === 'suspended') audio.resume();
+
+                [523, 659, 784].forEach((freq, i) => {
+                    const t0 = audio.currentTime + i * 0.1;
+                    const osc = audio.createOscillator();
+                    const gain = audio.createGain();
+                    osc.type = 'sine';
+                    osc.frequency.value = freq;
+                    gain.gain.setValueAtTime(0.0001, t0);
+                    gain.gain.exponentialRampToValueAtTime(0.2, t0 + 0.02);
+                    gain.gain.exponentialRampToValueAtTime(0.0001, t0 + 0.25);
+                    osc.connect(gain);
+                    gain.connect(audio.destination);
+                    osc.start(t0);
+                    osc.stop(t0 + 0.28);
+                });
+            }
+
+            return { popBang, successChime };
+        })();
+
+        /* =========================================================
+         * Phonics helpers
+         * ========================================================= */
+        const Phonics = (() => {
+            const REGEX = /(igh|tch|dge)|(ar|er|ir|or|ur)|(ee|ea|ai|ay|oa|ow|ou|oo|oi|oy|au|aw|ew)|(sh|ch|th|wh|ph|ck|ng|qu)|([aeiou])|([^aeiou])/g;
+
+            function tokenize(word) {
+                const tokens = [];
+                let match;
+                REGEX.lastIndex = 0;
+                while ((match = REGEX.exec(word)) !== null) {
+                    tokens.push(match[0]);
+                }
+                return tokens;
+            }
+
+            function parseWords(text) {
+                const seen = new Set();
+                const words = [];
+                text.split(/\s+/).forEach(part => {
+                    const clean = part.replace(/[^a-zA-Z]/g, '').toLowerCase();
+                    if (clean && !seen.has(clean)) {
+                        seen.add(clean);
+                        words.push(clean);
+                    }
+                });
+                return words;
+            }
+
+            const TRAP_LETTERS = 'bdfgjklmnpqrstvwxyz'.split('');
+
+            function makeTrapLabel(correctSet) {
+                let letter;
+                let tries = 0;
+                do {
+                    letter = TRAP_LETTERS[Math.floor(Math.random() * TRAP_LETTERS.length)];
+                    tries += 1;
+                } while (correctSet.has(letter) && tries < 20);
+                return letter;
+            }
+
+            /** 정답 풍선 + 함정 풍선 섞기 */
+            function buildBalloonItems(tokens) {
+                const correctSet = new Set(tokens.map(t => t.toLowerCase()));
+                const items = tokens.map((text, order) => ({
+                    id: `good-${order}-${text}`,
+                    text,
+                    kind: 'good',
+                    order
+                }));
+
+                const trapCount = Math.min(3, Math.max(2, tokens.length));
+                for (let i = 0; i < trapCount; i++) {
+                    items.push({
+                        id: `trap-${i}-${Math.random().toString(36).slice(2, 6)}`,
+                        text: makeTrapLabel(correctSet),
+                        kind: 'trap',
+                        order: -1,
+                        trapStyle: i % 3 === 0 ? '' : i % 3 === 1 ? 'alt' : 'alt2'
+                    });
+                }
+
+                return shuffle(items);
+            }
+
+            function shuffle(arr) {
+                const a = arr.slice();
+                for (let i = a.length - 1; i > 0; i--) {
+                    const j = Math.floor(Math.random() * (i + 1));
+                    [a[i], a[j]] = [a[j], a[i]];
+                }
+                return a;
+            }
+
+            return { tokenize, parseWords, buildBalloonItems, shuffle };
+        })();
+
+        /* =========================================================
+         * Money / Name
+         * ========================================================= */
+        function setMoney(amount) {
+            state.money = Math.max(0, Math.floor(amount));
+            persist();
+            UI.updateMoney();
+        }
+
+        function addMoney(delta) {
+            setMoney(state.money + delta);
+            UI.pulseMoney();
+        }
+
+        function setPlayerName(name) {
+            state.playerName = name.trim();
+            persist();
+            UI.updatePlayerName();
+        }
+
+        const REWARD = {
+            WORD_CLEAR: 10,
+            STAGE1_CLEAR: 30,
+            MATCH_CLEAR: 15,
+            STAGE2_CLEAR: 40
+        };
+
+        /* =========================================================
+         * Router
+         * ========================================================= */
+        const Router = (() => {
+            const screens = {
+                name: document.getElementById('screen-name'),
+                home: document.getElementById('screen-home'),
+                words: document.getElementById('screen-words'),
+                stage1: document.getElementById('screen-stage1'),
+                stage2: document.getElementById('screen-stage2'),
+                stage3: document.getElementById('screen-stage3')
+            };
+
+            function go(screenId, opts = {}) {
+                if (!screens[screenId]) return;
+                Object.values(screens).forEach(el => el.classList.remove('active'));
+                screens[screenId].classList.add('active');
+                state.stage = screenId;
+                persist();
+                if (opts.onEnter) opts.onEnter();
+            }
+
+            function boot() {
+                if (!state.playerName) {
+                    go('name');
+                    return;
+                }
+                const restoreable = ['home', 'words', 'stage1', 'stage2', 'stage3'];
+                if (restoreable.includes(state.stage) && state.stage !== 'name') {
+                    if (state.stage === 'stage1' && state.words.length) {
+                        go('stage1', { onEnter: () => Stage1.start(state.progress.currentWordIndex || 0) });
+                    } else if (state.stage === 'stage2' && state.words.length) {
+                        go('stage2', { onEnter: () => Stage2.start(state.progress.matchWordIndex || 0) });
+                    } else if (state.stage === 'words') {
+                        go('words', { onEnter: () => WordsScreen.sync() });
+                    } else {
+                        go(state.stage === 'name' ? 'home' : state.stage);
+                    }
+                } else {
+                    go('home');
+                }
+            }
+
+            return { go, boot, screens };
+        })();
+
+        /* =========================================================
+         * UI helpers
+         * ========================================================= */
+        const UI = (() => {
+            const moneyValue = document.getElementById('moneyValue');
+            const moneyBadge = document.getElementById('moneyBadge');
+            const playerNameText = document.getElementById('playerNameText');
+            const nameInput = document.getElementById('nameInput');
+            const nameError = document.getElementById('nameError');
+            const overlay = document.getElementById('celebrateOverlay');
+            const celebrateTitle = document.getElementById('celebrateTitle');
+            const celebrateMsg = document.getElementById('celebrateMsg');
+            const celebrateEmoji = document.getElementById('celebrateEmoji');
+            const celebrateNextBtn = document.getElementById('celebrateNextBtn');
+            let celebrateHandler = null;
+
+            function updateMoney() {
+                moneyValue.textContent = String(state.money);
+            }
+
+            function pulseMoney() {
+                moneyBadge.classList.remove('pop');
+                void moneyBadge.offsetWidth;
+                moneyBadge.classList.add('pop');
+            }
+
+            function updatePlayerName() {
+                playerNameText.textContent = state.playerName || '친구';
+                nameInput.value = state.playerName || '';
+                const greet = document.getElementById('wordsGreeting');
+                if (greet && state.playerName) {
+                    greet.textContent = `${state.playerName}아(야), 단어를 입력하고 게임을 시작해요!`;
+                }
+            }
+
+            function showNameError(msg) {
+                nameError.textContent = msg || '';
+            }
+
+            function validateName(raw) {
+                const name = (raw || '').trim();
+                if (!name) return { ok: false, message: '이름을 입력해 주세요!' };
+                if (name.length > 12) return { ok: false, message: '이름은 12글자까지예요.' };
+                return { ok: true, name };
+            }
+
+            function showCelebrate({ title, message, emoji, buttonLabel, onNext }) {
+                celebrateTitle.textContent = title;
+                celebrateMsg.textContent = message;
+                celebrateEmoji.textContent = emoji || '🎉';
+                celebrateNextBtn.textContent = buttonLabel || '다음!';
+                celebrateHandler = onNext;
+                overlay.classList.add('show');
+            }
+
+            function hideCelebrate() {
+                overlay.classList.remove('show');
+                celebrateHandler = null;
+            }
+
+            celebrateNextBtn.addEventListener('click', () => {
+                const fn = celebrateHandler;
+                hideCelebrate();
+                if (fn) fn();
+            });
+
+            return {
+                updateMoney,
+                pulseMoney,
+                updatePlayerName,
+                showNameError,
+                validateName,
+                showCelebrate,
+                hideCelebrate,
+                nameInput,
+                nameError
+            };
+        })();
+
+        /* =========================================================
+         * Home
+         * ========================================================= */
+        const Home = (() => {
+            function submitName() {
+                const result = UI.validateName(UI.nameInput.value);
+                if (!result.ok) {
+                    UI.showNameError(result.message);
+                    UI.nameInput.focus();
+                    return;
+                }
+                UI.showNameError('');
+                setPlayerName(result.name);
+                Router.go('home');
+            }
+
+            function bind() {
+                document.getElementById('saveNameBtn').addEventListener('click', submitName);
+                UI.nameInput.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') submitName();
+                });
+                UI.nameInput.addEventListener('input', () => {
+                    if (UI.nameError.textContent) UI.showNameError('');
+                });
+                document.getElementById('playerNameBtn').addEventListener('click', () => {
+                    Router.go('words', { onEnter: () => WordsScreen.sync() });
+                });
+                document.getElementById('changeNameBtn').addEventListener('click', () => {
+                    UI.nameInput.value = state.playerName || '';
+                    UI.showNameError('');
+                    Router.go('name');
+                    requestAnimationFrame(() => UI.nameInput.focus());
+                });
+                document.getElementById('brandHomeBtn').addEventListener('click', () => {
+                    if (state.playerName) Router.go('home');
+                    else Router.go('name');
+                });
+            }
+
+            return { bind };
+        })();
+
+        /* =========================================================
+         * Words Screen
+         * ========================================================= */
+        const WordsScreen = (() => {
+            const wordInput = document.getElementById('wordInput');
+            const wordError = document.getElementById('wordError');
+            const wordChips = document.getElementById('wordChips');
+
+            function renderChips(words) {
+                wordChips.innerHTML = '';
+                words.forEach(w => {
+                    const chip = document.createElement('span');
+                    chip.className = 'word-chip';
+                    chip.textContent = w;
+                    wordChips.appendChild(chip);
+                });
+            }
+
+            function sync() {
+                wordInput.value = (state.words || []).join(' ');
+                renderChips(state.words || []);
+                wordError.textContent = '';
+                UI.updatePlayerName();
+            }
+
+            function saveFromInput() {
+                const words = Phonics.parseWords(wordInput.value.trim());
+                if (!words.length) {
+                    wordError.textContent = '영어 단어를 하나 이상 입력해 주세요!';
+                    return null;
+                }
+                wordError.textContent = '';
+                state.words = words;
+                state.progress.currentWordIndex = 0;
+                state.progress.matchWordIndex = 0;
+                state.progress.stage1Done = false;
+                state.progress.stage2Done = false;
+                persist();
+                renderChips(words);
+                return words;
+            }
+
+            function startStage1() {
+                const words = saveFromInput();
+                if (!words) {
+                    wordInput.focus();
+                    return;
+                }
+                Router.go('stage1', { onEnter: () => Stage1.start(0) });
+            }
+
+            function bind() {
+                document.getElementById('startStage1Btn').addEventListener('click', startStage1);
+                document.getElementById('wordsBackHomeBtn').addEventListener('click', () => {
+                    saveFromInput(); // 입력 중 내용도 저장 시도 (유효할 때만)
+                    Router.go('home');
+                });
+                wordInput.addEventListener('keydown', e => {
+                    if (e.key === 'Enter') startStage1();
+                });
+                wordInput.addEventListener('input', () => {
+                    const preview = Phonics.parseWords(wordInput.value.trim());
+                    renderChips(preview);
+                    if (wordError.textContent) wordError.textContent = '';
+                });
+            }
+
+            return { bind, sync, saveFromInput, startStage1 };
+        })();
+
+        /* =========================================================
+         * Stage 1 — Balloon Blending Game
+         * ========================================================= */
+        const Stage1 = (() => {
+            const grid = document.getElementById('balloonGrid');
+            const trail = document.getElementById('blendTrail');
+            const wordLabel = document.getElementById('stage1WordLabel');
+            const progressEl = document.getElementById('stage1Progress');
+            const guideEl = document.getElementById('stage1Guide');
+
+            let tokens = [];
+            let nextIndex = 0;
+            let busy = false;
+            let currentWord = '';
+
+            function currentWords() {
+                return state.words || [];
+            }
+
+            function updateHeader() {
+                const words = currentWords();
+                const i = state.progress.currentWordIndex;
+                progressEl.textContent = `${i + 1} / ${words.length}`;
+                wordLabel.textContent = currentWord;
+                guideEl.innerHTML = '파란 풍선을 <strong>순서대로</strong> 터뜨려 보세요! (주황·분홍은 함정!)';
+            }
+
+            function renderTrail() {
+                trail.innerHTML = '';
+                tokens.slice(0, nextIndex).forEach(t => {
+                    const chip = document.createElement('span');
+                    chip.className = 'blend-chip';
+                    chip.textContent = t;
+                    trail.appendChild(chip);
+                });
+            }
+
+            function createBalloon(item) {
+                const btn = document.createElement('button');
+                btn.type = 'button';
+                btn.className = 'balloon ' + (item.kind === 'good' ? 'is-good' : `is-trap ${item.trapStyle || ''}`);
+                btn.dataset.id = item.id;
+                btn.dataset.kind = item.kind;
+                btn.dataset.order = String(item.order);
+                btn.dataset.text = item.text;
+                btn.setAttribute('aria-label', item.kind === 'good' ? `소리 ${item.text}` : `함정 ${item.text}`);
+
+                btn.innerHTML = `
+                    <span class="bubble">${item.text}</span>
+                    <span class="string" aria-hidden="true"></span>
+                `;
+
+                btn.addEventListener('click', () => onBalloonClick(btn, item));
+                return btn;
+            }
+
+            function setupRound(word) {
+                currentWord = word;
+                tokens = Phonics.tokenize(word);
+                nextIndex = 0;
+                busy = false;
+                updateHeader();
+                renderTrail();
+
+                const items = Phonics.buildBalloonItems(tokens);
+                grid.innerHTML = '';
+                items.forEach(item => grid.appendChild(createBalloon(item)));
+            }
+
+            function start(wordIndex = 0) {
+                const words = currentWords();
+                if (!words.length) {
+                    Router.go('words', { onEnter: () => WordsScreen.sync() });
+                    return;
+                }
+                const idx = Math.min(Math.max(0, wordIndex), words.length - 1);
+                state.progress.currentWordIndex = idx;
+                persist();
+                setupRound(words[idx]);
+            }
+
+            async function onBalloonClick(btn, item) {
+                if (busy || btn.classList.contains('burst')) return;
+
+                if (item.kind === 'trap') {
+                    handleTrap(btn);
+                    return;
+                }
+
+                if (item.order !== nextIndex) {
+                    handleWrongOrder(btn);
+                    return;
+                }
+
+                busy = true;
+                btn.classList.add('burst');
+                nextIndex += 1;
+                renderTrail();
+                await TTS.speak(item.text);
+
+                if (nextIndex >= tokens.length) {
+                    await finishWord();
+                } else {
+                    busy = false;
+                }
+            }
+
+            function handleTrap(btn) {
+                SFX.popBang();
+                btn.classList.add('wrong-shake');
+                setTimeout(() => btn.classList.remove('wrong-shake'), 450);
+                TTS.speak('bang', { rate: 1, pitch: 0.8 });
+            }
+
+            function handleWrongOrder(btn) {
+                SFX.popBang();
+                btn.classList.add('wrong-shake');
+                setTimeout(() => btn.classList.remove('wrong-shake'), 450);
+            }
+
+            async function finishWord() {
+                SFX.successChime();
+                await TTS.speak(currentWord);
+                addMoney(REWARD.WORD_CLEAR);
+
+                const words = currentWords();
+                const idx = state.progress.currentWordIndex;
+                const isLast = idx >= words.length - 1;
+
+                if (isLast) {
+                    state.progress.stage1Done = true;
+                    persist();
+                    addMoney(REWARD.STAGE1_CLEAR);
+                    UI.showCelebrate({
+                        title: '1단계 완료!',
+                        message: `모든 단어를 다 했어요! +${REWARD.WORD_CLEAR + REWARD.STAGE1_CLEAR} 머니를 받았어요 💰`,
+                        emoji: '🏆',
+                        buttonLabel: '2단계 시작!',
+                        onNext: () => Router.go('stage2', { onEnter: () => Stage2.start(0) })
+                    });
+                } else {
+                    UI.showCelebrate({
+                        title: '잘했어!',
+                        message: `"${currentWord}" 완성! +${REWARD.WORD_CLEAR} 머니 💰 다음 단어로 가요!`,
+                        emoji: '🎉',
+                        buttonLabel: '다음 단어',
+                        onNext: () => {
+                            state.progress.currentWordIndex = idx + 1;
+                            persist();
+                            start(idx + 1);
+                        }
+                    });
+                }
+                busy = false;
+            }
+
+            function bind() {
+                document.getElementById('stage1RestartBtn').addEventListener('click', () => {
+                    start(state.progress.currentWordIndex);
+                });
+                document.getElementById('stage1ToWordsBtn').addEventListener('click', () => {
+                    Router.go('words', { onEnter: () => WordsScreen.sync() });
+                });
+                document.getElementById('stage3SoonHomeBtn').addEventListener('click', () => Router.go('home'));
+            }
+
+            return { start, bind };
+        })();
+
+        /* =========================================================
+         * Word Pictures — 귀여운 아이콘(이모지) 사전
+         * ========================================================= */
+        const WordPictures = (() => {
+            const MAP = {
+                cake: '🎂', pie: '🥧', jam: '🍓', bun: '🍞', egg: '🥚',
+                milk: '🥛', juice: '🧃', ice: '🧊', tea: '🍵', rice: '🍚',
+                apple: '🍎', grape: '🍇', pear: '🍐', peach: '🍑', mango: '🥭',
+                kite: '🪁', sun: '☀️', moon: '🌙', star: '⭐',
+                cat: '🐱', dog: '🐶', pig: '🐷', cow: '🐮', hen: '🐔',
+                bee: '🐝', bug: '🐞', ant: '🐜', fish: '🐠', bird: '🐦',
+                fox: '🦊', duck: '🦆', frog: '🐸', bat: '🦇', rat: '🐀',
+                sheep: '🐑', goat: '🐐', mouse: '🐭', mice: '🐁', mule: '🫏',
+                car: '🚗', bus: '🚌', bike: '🚲', train: '🚂', boat: '⛵',
+                plane: '✈️', ship: '🚢', truck: '🚚', van: '🚐', road: '🛣️',
+                ball: '⚽', doll: '🪆', book: '📖', pen: '🖊️', bag: '🎒',
+                hat: '🎩', cap: '🧢', sock: '🧦', shoe: '👟', shirt: '👕', coat: '🧥',
+                home: '🏠', house: '🏠', tree: '🌳', flower: '🌸', leaf: '🍃',
+                rain: '🌧️', snow: '❄️', cloud: '☁️', wind: '💨', fire: '🔥',
+                water: '💧', lake: '🏞️', sea: '🌊', sand: '🏖️', rock: '🪨',
+                king: '🤴', queen: '👸', baby: '👶', mom: '👩', dad: '👨',
+                bed: '🛏️', box: '📦', cup: '🥤', pan: '🍳', pot: '🪴',
+                red: '🔴', blue: '🔵', green: '🟢', yellow: '🟡', pink: '🩷',
+                black: '⚫', white: '⚪', orange: '🟠', purple: '🟣',
+                big: '🐘', small: '🐭', hot: '🥵', cold: '🥶', happy: '😄',
+                sad: '😢', smile: '😊', laugh: '😂', love: '❤️', heart: '💖',
+                nose: '👃', hand: '✋', foot: '🦶', eye: '👀', ear: '👂',
+                bite: '🦷', time: '⏰', game: '🎮', toy: '🧸', gift: '🎁',
+                rope: '🪢', bone: '🦴', cone: '🍦', note: '🎵', hope: '🌈',
+                bake: '🧁', rake: '🧹', make: '🛠️',
+                nice: '😊', dice: '🎲', hike: '🥾', like: '👍',
+                cute: '🥰', mute: '🔇', flute: '🪈',
+                nine: '9️⃣', five: '5️⃣', six: '6️⃣', ten: '🔟',
+                gate: '🚪', late: '⏰', date: '📅', plate: '🍽️',
+                name: '🏷️', same: '👯',
+                ride: '🎠', hide: '🙈', side: '↔️', wide: '↔️',
+                site: '📍', tube: '🧪', cube: '🧊', tune: '🎶',
+                see: '👀', free: '🕊️', sleep: '😴',
+                paint: '🎨', snail: '🐌',
+                night: '🌃', light: '💡', right: '➡️', fight: '🥊',
+                chair: '🪑', cheese: '🧀', chick: '🐤', chip: '🍟',
+                phone: '📱', photo: '📷', whale: '🐋',
+                thumb: '👍', three: '3️⃣', thin: '📏',
+                quick: '⚡', quiz: '❓',
+                snake: '🐍', smoke: '💨',
+                clock: '🕐', lock: '🔒',
+                ring: '💍', song: '🎵', long: '📏',
+                shop: '🏪', wish: '🌟',
+                trash: '🗑️', brush: '🪥', fresh: '🌿'
+            };
+
+            const DECOYS = Object.keys(MAP);
+
+            function get(word) {
+                const key = (word || '').toLowerCase();
+                return MAP[key] || null;
+            }
+
+            function renderInto(container, word) {
+                const emoji = get(word);
+                container.innerHTML = '';
+                if (emoji) {
+                    const span = document.createElement('span');
+                    span.className = 'pic-emoji';
+                    span.id = 'matchEmoji';
+                    span.setAttribute('aria-hidden', 'true');
+                    span.textContent = emoji;
+                    container.appendChild(span);
+                } else {
+                    const wrap = document.createElement('div');
+                    wrap.className = 'pic-fallback';
+                    wrap.innerHTML = `
+                        <div class="letter">${(word[0] || '?').toUpperCase()}</div>
+                        <div class="hint-word" aria-hidden="true">${'★'.repeat(Math.min(word.length, 6))}</div>
+                    `;
+                    container.appendChild(wrap);
+                }
+
+                const hear = document.createElement('button');
+                hear.type = 'button';
+                hear.className = 'match-hear-btn';
+                hear.id = 'matchHearBtn';
+                hear.title = '힌트 듣기';
+                hear.setAttribute('aria-label', '힌트 듣기');
+                hear.textContent = '🔊';
+                container.appendChild(hear);
+                return hear;
+            }
+
+            function pickDistractors(answer, count, fromWords) {
+                const pool = Phonics.shuffle([
+                    ...new Set([
+                        ...(fromWords || []).filter(w => w !== answer),
+                        ...DECOYS.filter(w => w !== answer)
+                    ])
+                ]);
+                return pool.slice(0, count);
+            }
+
+            return { get, renderInto, pickDistractors, MAP };
+        })();
+
+        /* =========================================================
+         * Stage 2 — Picture Matching
+         * ========================================================= */
+        const Stage2 = (() => {
+            const pictureEl = document.getElementById('matchPicture');
+            const choicesEl = document.getElementById('matchChoices');
+            const progressEl = document.getElementById('stage2Progress');
+            const guideEl = document.getElementById('stage2Guide');
+
+            let currentWord = '';
+            let busy = false;
+
+            function currentWords() {
+                return state.words || [];
+            }
+
+            function setupRound(word) {
+                currentWord = word;
+                busy = false;
+                const words = currentWords();
+                const idx = state.progress.matchWordIndex || 0;
+                progressEl.textContent = `${idx + 1} / ${words.length}`;
+                guideEl.textContent = '그림을 보고 알맞은 단어를 골라 보세요!';
+
+                const hearBtn = WordPictures.renderInto(pictureEl, word);
+                hearBtn.addEventListener('click', () => {
+                    // 힌트: 첫 소리만 살짝 (정답 전체는 말하지 않음)
+                    const tokens = Phonics.tokenize(word);
+                    TTS.speak(tokens[0] || word[0]);
+                });
+
+                const distractors = WordPictures.pickDistractors(word, 3, words);
+                const options = Phonics.shuffle([word, ...distractors]).slice(0, 4);
+
+                choicesEl.innerHTML = '';
+                options.forEach(opt => {
+                    const btn = document.createElement('button');
+                    btn.type = 'button';
+                    btn.className = 'match-choice';
+                    btn.textContent = opt;
+                    btn.addEventListener('click', () => onChoice(btn, opt));
+                    choicesEl.appendChild(btn);
+                });
+            }
+
+            function start(wordIndex = 0) {
+                const words = currentWords();
+                if (!words.length) {
+                    Router.go('words', { onEnter: () => WordsScreen.sync() });
+                    return;
+                }
+                const idx = Math.min(Math.max(0, wordIndex), words.length - 1);
+                state.progress.matchWordIndex = idx;
+                persist();
+                setupRound(words[idx]);
+            }
+
+            async function onChoice(btn, opt) {
+                if (busy) return;
+
+                if (opt !== currentWord) {
+                    SFX.popBang();
+                    btn.classList.add('wrong');
+                    btn.disabled = true;
+                    setTimeout(() => btn.classList.remove('wrong'), 450);
+                    return;
+                }
+
+                busy = true;
+                [...choicesEl.querySelectorAll('.match-choice')].forEach(b => {
+                    b.disabled = true;
+                    if (b.textContent === currentWord) b.classList.add('correct');
+                });
+
+                SFX.successChime();
+                await TTS.speak(currentWord);
+                addMoney(REWARD.MATCH_CLEAR);
+
+                const words = currentWords();
+                const idx = state.progress.matchWordIndex || 0;
+                const isLast = idx >= words.length - 1;
+
+                if (isLast) {
+                    state.progress.stage2Done = true;
+                    persist();
+                    addMoney(REWARD.STAGE2_CLEAR);
+                    UI.showCelebrate({
+                        title: '2단계 완료!',
+                        message: `그림 매칭 성공! +${REWARD.MATCH_CLEAR + REWARD.STAGE2_CLEAR} 머니 💰`,
+                        emoji: '🖼️',
+                        buttonLabel: '3단계 구경하기',
+                        onNext: () => Router.go('stage3')
+                    });
+                } else {
+                    UI.showCelebrate({
+                        title: '정답!',
+                        message: `"${currentWord}" 맞아요! +${REWARD.MATCH_CLEAR} 머니 💰`,
+                        emoji: '🌟',
+                        buttonLabel: '다음 그림',
+                        onNext: () => {
+                            state.progress.matchWordIndex = idx + 1;
+                            persist();
+                            start(idx + 1);
+                        }
+                    });
+                }
+                busy = false;
+            }
+
+            function bind() {
+                document.getElementById('stage2RestartBtn').addEventListener('click', () => {
+                    start(state.progress.matchWordIndex || 0);
+                });
+                document.getElementById('stage2ToWordsBtn').addEventListener('click', () => {
+                    Router.go('words', { onEnter: () => WordsScreen.sync() });
+                });
+                document.getElementById('stage2HomeBtn').addEventListener('click', () => Router.go('home'));
+            }
+
+            return { start, bind };
+        })();
+
+        /* =========================================================
+         * Boot
+         * ========================================================= */
+        function init() {
+            UI.updateMoney();
+            UI.updatePlayerName();
+            Home.bind();
+            WordsScreen.bind();
+            Stage1.bind();
+            Stage2.bind();
+            Router.boot();
+        }
+
+        init();
+
+        window.PhonicsApp = {
+            getState: () => JSON.parse(JSON.stringify(state)),
+            addMoney,
+            setMoney,
+            Router,
+            Storage,
+            TTS,
+            Stage1,
+            Stage2,
+            WordsScreen,
+            WordPictures
+        };
+    </script>
+</body>
+</html>
