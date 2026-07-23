@@ -530,6 +530,31 @@
             width: 100%;
         }
 
+        .stage-home-btn {
+            flex-shrink: 0;
+            display: inline-flex;
+            align-items: center;
+            gap: 4px;
+            font-family: inherit;
+            font-size: 0.85rem;
+            padding: 5px 11px;
+            border-radius: 999px;
+            border: 2px solid #BCAAA4;
+            background: linear-gradient(180deg, #FFF8F0, #F5EDE6);
+            color: #6D4C41;
+            cursor: pointer;
+            line-height: 1.2;
+            box-shadow: 0 2px 0 #D7CCC8;
+            transition: transform 0.12s ease, background 0.12s ease;
+        }
+
+        .stage-home-btn:hover {
+            transform: scale(1.05);
+            background: linear-gradient(180deg, #FFF3E0, #FFE0B2);
+        }
+
+        .stage-home-btn:active { transform: scale(0.96); }
+
         .stage-badge {
             background: #E3F2FD;
             color: #1565C0;
@@ -1110,6 +1135,26 @@
             user-select: none;
         }
 
+        .match-picture-wrap .pic-image {
+            width: 78%;
+            height: 78%;
+            max-width: 240px;
+            max-height: 240px;
+            object-fit: cover;
+            border-radius: 22px;
+            box-shadow: 0 8px 18px rgba(0, 0, 0, 0.12);
+            animation: bounceSoft 2.8s ease-in-out infinite;
+            background: #fff;
+            user-select: none;
+            pointer-events: none;
+        }
+
+        .match-picture-wrap .pic-image.is-illustration {
+            object-fit: contain;
+            padding: 12px;
+            background: rgba(255, 255, 255, 0.55);
+        }
+
         .match-picture-wrap .pic-fallback {
             display: flex;
             flex-direction: column;
@@ -1118,23 +1163,16 @@
             padding: 16px;
         }
 
-        .match-picture-wrap .pic-fallback .letter {
-            width: 96px;
-            height: 96px;
-            border-radius: 28px;
-            display: grid;
-            place-items: center;
-            font-size: 3rem;
-            color: #fff;
-            background: linear-gradient(145deg, #FF8A65, #FFB74D);
-            box-shadow: 0 8px 18px rgba(255, 138, 101, 0.35);
+        .match-picture-wrap .pic-fallback .mystery {
+            font-size: 3.5rem;
+            line-height: 1;
+            filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
         }
 
         .match-picture-wrap .pic-fallback .hint-word {
             font-size: 1rem;
             color: #8D6E63;
             letter-spacing: 0.12em;
-            text-transform: uppercase;
         }
 
         .match-hear-btn {
@@ -1214,6 +1252,24 @@
             line-height: 1;
             margin: 0;
             filter: drop-shadow(0 4px 8px rgba(0,0,0,0.1));
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .spell-hint-pic .spell-hint-img {
+            width: clamp(3.2rem, 14vw, 4.6rem);
+            height: clamp(3.2rem, 14vw, 4.6rem);
+            object-fit: cover;
+            border-radius: 14px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            background: #fff;
+        }
+
+        .spell-hint-pic .spell-hint-img.is-illustration {
+            object-fit: contain;
+            padding: 4px;
+            background: rgba(255,255,255,0.7);
         }
 
         /* 오답 응원 — 이미지 위, 진행 방해 없음 */
@@ -1604,6 +1660,7 @@
         <section class="screen" id="screen-stage1" data-screen="stage1" aria-label="1단계 단어풍선 팡팡">
             <div class="card stack">
                 <div class="stage-header">
+                    <button type="button" class="stage-home-btn" id="stage1HomeBtn" title="홈으로" aria-label="홈으로">🏠 홈</button>
                     <span class="stage-badge">1단계: 단어풍선 팡팡!</span>
                     <span class="progress-text" id="stage1Progress">1 / 1</span>
                 </div>
@@ -1618,7 +1675,6 @@
 
                 <div class="nav-row">
                     <button type="button" class="btn btn-ghost" id="stage1RestartBtn">다시 하기</button>
-                    <button type="button" class="btn btn-ghost" id="stage1ToWordsBtn">단어 다시 고르기</button>
                 </div>
             </div>
         </section>
@@ -1627,13 +1683,14 @@
         <section class="screen" id="screen-stage2" data-screen="stage2" aria-label="2단계 그림 매칭">
             <div class="card stack">
                 <div class="stage-header">
+                    <button type="button" class="stage-home-btn" id="stage2HomeBtn" title="홈으로" aria-label="홈으로">🏠 홈</button>
                     <span class="stage-badge">2단계 · 그림 매칭</span>
                     <span class="progress-text" id="stage2Progress">1 / 1</span>
                 </div>
                 <p class="guide-text" id="stage2Guide">그림을 보고 알맞은 단어를 골라 보세요!</p>
 
                 <div class="match-picture-wrap" id="matchPicture">
-                    <span class="pic-emoji" id="matchEmoji" aria-hidden="true">🎂</span>
+                    <img class="pic-image" id="matchEmoji" alt="" aria-hidden="true" src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=480&h=480&q=80">
                     <button type="button" class="match-hear-btn" id="matchHearBtn" title="힌트 듣기" aria-label="힌트 듣기">🔊</button>
                 </div>
 
@@ -1641,8 +1698,6 @@
 
                 <div class="nav-row">
                     <button type="button" class="btn btn-ghost" id="stage2RestartBtn">다시 하기</button>
-                    <button type="button" class="btn btn-ghost" id="stage2ToWordsBtn">단어 다시 고르기</button>
-                    <button type="button" class="btn btn-ghost" id="stage2HomeBtn">홈으로</button>
                 </div>
             </div>
         </section>
@@ -1651,6 +1706,7 @@
         <section class="screen" id="screen-stage3" data-screen="stage3" aria-label="3단계 메롱메롱">
             <div class="card stack">
                 <div class="stage-header">
+                    <button type="button" class="stage-home-btn" id="stage3HomeBtn" title="홈으로" aria-label="홈으로">🏠 홈</button>
                     <span class="stage-badge">[3단계 : 메롱메롱~]</span>
                     <span class="progress-text" id="stage3Progress">1 / 1</span>
                 </div>
@@ -1673,8 +1729,6 @@
 
                 <div class="nav-row">
                     <button type="button" class="btn btn-ghost" id="stage3RestartBtn">다시 하기</button>
-                    <button type="button" class="btn btn-ghost" id="stage3ToWordsBtn">단어 다시 고르기</button>
-                    <button type="button" class="btn btn-ghost" id="stage3HomeBtn">홈으로</button>
                 </div>
             </div>
         </section>
@@ -2987,8 +3041,13 @@
             function onBalloonTap(btn, item) {
                 if (roundLocked || btn.classList.contains('burst')) return;
 
-                // 함정 / 순서 틀림 → 오답음
-                if (item.kind === 'trap' || item.order !== nextIndex) {
+                // 지금 필요한 소리(남아 있는 정답 풀의 다음 글자)
+                const needed = (tokens[nextIndex] || '').toLowerCase();
+                const picked = (item.text || '').toLowerCase();
+
+                // 함정 / 단어에 없거나 이미 다 쓴 글자 → 오답
+                // (중복 글자는 인덱스와 무관하게, 같은 글자가 남아 있으면 허용)
+                if (item.kind === 'trap' || picked !== needed) {
                     playSoundWrong();
                     btn.classList.remove('is-pressed');
                     btn.classList.add('wrong-shake');
@@ -2996,7 +3055,7 @@
                     return;
                 }
 
-                // 정답 순서 → 경쾌한 팡!
+                // 정답 → 해당 글자 소모, 트레일에 차례로 채움
                 playSoundCorrect();
                 btn.dataset.consumed = '1';
                 btn.classList.add('burst');
@@ -3057,19 +3116,22 @@
                 document.getElementById('stage1RestartBtn').addEventListener('click', () => {
                     start(state.progress.currentWordIndex);
                 });
-                document.getElementById('stage1ToWordsBtn').addEventListener('click', () => {
-                    Router.go('words', { onEnter: () => WordsScreen.sync() });
-                });
+                document.getElementById('stage1HomeBtn').addEventListener('click', () => Router.go('home'));
             }
 
             return { start, bind };
         })();
 
         /* =========================================================
-         * Word Pictures — 귀여운 아이콘(이모지) 사전
+         * Word Pictures — 단어 의미 이미지 (Unsplash / Twemoji CDN / Wikipedia)
          * ========================================================= */
         const WordPictures = (() => {
-            const MAP = {
+            const TWEMOJI_BASE = 'https://cdn.jsdelivr.net/gh/jdecked/twemoji@14.1.2/assets/svg/';
+            const U = (id) =>
+                `https://images.unsplash.com/${id}?auto=format&fit=crop&w=480&h=480&q=80`;
+
+            /* 의미 이모지 → Twemoji CDN 일러스트 URL로 변환 */
+            const EMOJI = {
                 cake: '🎂', pie: '🥧', jam: '🍓', bun: '🍞', egg: '🥚',
                 milk: '🥛', juice: '🧃', ice: '🧊', tea: '🍵', rice: '🍚',
                 apple: '🍎', grape: '🍇', pear: '🍐', peach: '🍑', mango: '🥭',
@@ -3116,33 +3178,193 @@
                 trash: '🗑️', brush: '🪥', fresh: '🌿'
             };
 
-            const DECOYS = Object.keys(MAP);
+            /* 실제 의미 사진 (Unsplash 무료 라이선스) — 우선 사용, 실패 시 Twemoji */
+            const PHOTOS = {
+                apple: U('photo-1560806887-1e4cd0b6cbd6'),
+                ball: U('photo-1614632537423-1e6c2e7e0aab'),
+                cat: U('photo-1514888286974-6c03e2ca1dba'),
+                dog: U('photo-1552053831-71594a27632d'),
+                cake: U('photo-1578985545062-69928b1d9587'),
+                book: U('photo-1544947950-fa07a98d237f'),
+                car: U('photo-1492144534655-ae79c964c9d7'),
+                bus: U('photo-1544620341-1adc1b81c681'),
+                bike: U('photo-1485965120184-e220f721d03e'),
+                train: U('photo-1474487548417-781cb71495f3'),
+                boat: U('photo-1544551763-46a013bb70d5'),
+                plane: U('photo-1436491865332-7a61a109cc05'),
+                sun: U('photo-1506905925346-21bda4d32df4'),
+                moon: U('photo-1532693322450-2cb5c511067d'),
+                star: U('photo-1419242902214-272b3f66ee7a'),
+                tree: U('photo-1502082553048-f009c37129b9'),
+                flower: U('photo-1490750967868-88aa6486c31d'),
+                fish: U('photo-1524704654690-b56c05c78a04'),
+                bird: U('photo-1444464666168-49d633b86797'),
+                bee: U('photo-1560114928-40f1f1eb26a0'),
+                frog: U('photo-1551184451-76b762941e04'),
+                duck: U('photo-1459682687229-93e3e3b3c95c'),
+                pig: U('photo-1516467508483-a7212febe31a'),
+                cow: U('photo-1493962853295-0fd70327578a'),
+                sheep: U('photo-1484557985045-edf25e08ea86'),
+                fox: U('photo-1474511320723-9a56873575b9'),
+                milk: U('photo-1563636619-e9143da7973b'),
+                egg: U('photo-1582722872445-44dc5f7e3cc8'),
+                juice: U('photo-1600271886742-f049cd451bba'),
+                tea: U('photo-1576092768241-dec231879fc3'),
+                rice: U('photo-1516684669134-de6f7c473a2a'),
+                grape: U('photo-1537640538966-79f369143f8f'),
+                pear: U('photo-1517282009859-f000ec3b26fe'),
+                peach: U('photo-1629828874514-d41da8fdbf6b'),
+                mango: U('photo-1553279768-865429fa0078'),
+                pie: U('photo-1535920523227-8b78e4d8e5c0'),
+                jam: U('photo-1471943311424-646960669fbc'),
+                bun: U('photo-1509440159596-0249088772ff'),
+                ice: U('photo-1491002052546-bf38f186af56'),
+                home: U('photo-1564013799919-ab600027ffc6'),
+                house: U('photo-1564013799919-ab600027ffc6'),
+                leaf: U('photo-1446071103084-c220f531fabc'),
+                rain: U('photo-1515694346937-94d85e41e6f0'),
+                snow: U('photo-1491002052546-bf38f186af56'),
+                cloud: U('photo-1534088568595-a066f410bcda'),
+                fire: U('photo-1478144592103-25e218a04891'),
+                water: U('photo-1548839140-29a749e1cf4d'),
+                lake: U('photo-1439066615861-d1af74d74000'),
+                sea: U('photo-1505144808419-1957a94ca61e'),
+                sand: U('photo-1507525428034-b723cf961d3e'),
+                rock: U('photo-1518709268805-4e9042af9f23'),
+                bed: U('photo-1505693416388-ac5ce068fe85'),
+                box: U('photo-1607166452427-7e4477079cb9'),
+                cup: U('photo-1514228742587-6b155407228c'),
+                pan: U('photo-1556910103-1c02745aae4d'),
+                pot: U('photo-1485955900006-10f4d32477c2'),
+                shoe: U('photo-1542291026-7eec264c27ff'),
+                shirt: U('photo-1521572163474-6864f9cf17ab'),
+                hat: U('photo-1521369909029-2afed882baee'),
+                sock: U('photo-1586350977771-b3b0abd50c40'),
+                bag: U('photo-1553062407-98eeb64c6a62'),
+                pen: U('photo-1585336261022-680e295ce3fe'),
+                doll: U('photo-1558877385-81a1c7e67d72'),
+                toy: U('photo-1558060370-d644479cb6f7'),
+                gift: U('photo-1513201099705-a9746e1e201f'),
+                phone: U('photo-1511707171634-5f897ff02aa9'),
+                photo: U('photo-1516035069371-29a1b824cc32'),
+                chair: U('photo-1506439773649-6e0eb8cfb237'),
+                cheese: U('photo-1486297678162-eb2a19b0a32d'),
+                chip: U('photo-1573080496219-bb080dd4f877'),
+                whale: U('photo-1568430462989-44163eb1752f'),
+                snake: U('photo-1531386151447-fd76ad50012f'),
+                snail: U('photo-1529927066849-79b791a69825'),
+                chick: U('photo-1548550023-2bdb16450078'),
+                hen: U('photo-1548550023-2bdb16450078'),
+                clock: U('photo-1563861826100-9cbac6977772'),
+                ring: U('photo-1605100804763-247f67b3557e'),
+                shop: U('photo-1441986300917-64674bd600d8'),
+                brush: U('photo-1559591937-abc8f032fcaa'),
+                paint: U('photo-1513364776144-60967b0f800f'),
+                plate: U('photo-1578500494198-444d5767e5e5'),
+                bone: U('photo-1587300003388-59208cc962cb'),
+                cone: U('photo-1563805042-7684c019e1cb'),
+                baby: U('photo-1519689680058-324335c77eba'),
+                heart: U('photo-1518199266791-5375a83190b7'),
+                love: U('photo-1518199266791-5375a83190b7'),
+                road: U('photo-1469854523086-cc02fe5d8800'),
+                truck: U('photo-1519003722824-194d4455a60c'),
+                ship: U('photo-1544551763-77ef2d0cfc6c'),
+                orange: U('photo-1547514701-42782101795e'),
+                mouse: U('photo-1425082661705-1834bfd09dca'),
+                goat: U('photo-1524024973431-2ec876407514'),
+                kite: U('photo-1558618047-f4d50daa7d4c'),
+                light: U('photo-1513506003901-1e6a229e2d15'),
+                night: U('photo-1507400492019-162c464edc9c'),
+                game: U('photo-1493711662062-fa541adb3fc8'),
+                flute: U('photo-1571330735066-03aaa9429d89'),
+                dice: U('photo-1511512578047-dfb367046420'),
+                lock: U('photo-1582139329536-e7284fece509'),
+                trash: U('photo-1611284446314-60a58ac0deb8'),
+                fresh: U('photo-1464226184884-fa280b87c399'),
+                song: U('photo-1511379938547-c1f69419868d'),
+                note: U('photo-1511379938547-c1f69419868d'),
+                time: U('photo-1563861826100-9cbac6977772'),
+                date: U('photo-1506784983877-45594efa4cbe'),
+                coat: U('photo-1544923246-77327dd567ec'),
+                cap: U('photo-1588850561407-ed78c282e89b'),
+                mom: U('photo-1492725764893-90b379c2b6e0'),
+                dad: U('photo-1507003211169-0a1dd7228f2d'),
+                hot: U('photo-1478144592103-25e218a04891'),
+                cold: U('photo-1491002052546-bf38f186af56'),
+                wind: U('photo-1527482372209-601042f489e1'),
+                bake: U('photo-1486427944299-d1955d23e34d'),
+                hike: U('photo-1551632811-561732d1e306'),
+                sleep: U('photo-1541781774459-bb2af2f05b55'),
+                eye: U('photo-1494869042583-f6c911a295d0'),
+                hand: U('photo-1587654780291-39c9404d746b'),
+                smile: U('photo-1522771739844-6a9f6d5f14af')
+            };
 
-            function get(word) {
-                const key = (word || '').toLowerCase();
-                return MAP[key] || null;
+            const wikiCache = Object.create(null);
+            const DECOYS = [...new Set([...Object.keys(EMOJI), ...Object.keys(PHOTOS)])];
+
+            function keyOf(word) {
+                return (word || '').toLowerCase().trim();
             }
 
-            function renderInto(container, word) {
-                const emoji = get(word);
-                container.innerHTML = '';
-                if (emoji) {
-                    const span = document.createElement('span');
-                    span.className = 'pic-emoji';
-                    span.id = 'matchEmoji';
-                    span.setAttribute('aria-hidden', 'true');
-                    span.textContent = emoji;
-                    container.appendChild(span);
-                } else {
-                    const wrap = document.createElement('div');
-                    wrap.className = 'pic-fallback';
-                    wrap.innerHTML = `
-                        <div class="letter">${(word[0] || '?').toUpperCase()}</div>
-                        <div class="hint-word" aria-hidden="true">${'★'.repeat(Math.min(word.length, 6))}</div>
-                    `;
-                    container.appendChild(wrap);
+            function emojiToTwemojiUrl(emoji) {
+                if (!emoji) return null;
+                const cps = [];
+                for (const ch of emoji) {
+                    const cp = ch.codePointAt(0);
+                    if (cp === 0xfe0f) continue;
+                    cps.push(cp.toString(16));
                 }
+                if (!cps.length) return null;
+                return TWEMOJI_BASE + cps.join('-') + '.svg';
+            }
 
+            function get(word) {
+                return EMOJI[keyOf(word)] || null;
+            }
+
+            /** @returns {{ url: string, kind: string, fallbackUrl: string|null } | null} */
+            function getImage(word) {
+                const key = keyOf(word);
+                const emoji = EMOJI[key];
+                const tw = emojiToTwemojiUrl(emoji);
+                if (PHOTOS[key]) {
+                    return { url: PHOTOS[key], kind: 'photo', fallbackUrl: tw };
+                }
+                if (tw) return { url: tw, kind: 'illustration', fallbackUrl: null };
+                return null;
+            }
+
+            function getImageUrl(word) {
+                const img = getImage(word);
+                return img ? img.url : null;
+            }
+
+            async function fetchWikiThumb(word) {
+                const key = keyOf(word);
+                if (!key) return null;
+                if (key in wikiCache) return wikiCache[key];
+                try {
+                    const res = await fetch(
+                        'https://en.wikipedia.org/api/rest_v1/page/summary/' + encodeURIComponent(key),
+                        { headers: { Accept: 'application/json' } }
+                    );
+                    if (!res.ok) {
+                        wikiCache[key] = null;
+                        return null;
+                    }
+                    const data = await res.json();
+                    const url = (data.thumbnail && data.thumbnail.source) ||
+                        (data.originalimage && data.originalimage.source) || null;
+                    wikiCache[key] = url;
+                    return url;
+                } catch (e) {
+                    wikiCache[key] = null;
+                    return null;
+                }
+            }
+
+            function appendHearButton(container) {
                 const hear = document.createElement('button');
                 hear.type = 'button';
                 hear.className = 'match-hear-btn';
@@ -3154,17 +3376,116 @@
                 return hear;
             }
 
+            function showFallback(container) {
+                const wrap = document.createElement('div');
+                wrap.className = 'pic-fallback';
+                wrap.innerHTML =
+                    '<div class="mystery" aria-hidden="true">🖼️</div>' +
+                    '<div class="hint-word">의미 그림</div>';
+                container.appendChild(wrap);
+            }
+
+            function mountImage(container, url, kind, fallbackUrl) {
+                const img = document.createElement('img');
+                img.className = 'pic-image' + (kind === 'illustration' ? ' is-illustration' : '');
+                img.id = 'matchEmoji';
+                img.src = url;
+                img.alt = '';
+                img.decoding = 'async';
+                img.loading = 'eager';
+                img.draggable = false;
+                img.onerror = function () {
+                    if (fallbackUrl && img.dataset.retried !== '1') {
+                        img.dataset.retried = '1';
+                        img.classList.add('is-illustration');
+                        img.src = fallbackUrl;
+                        return;
+                    }
+                    img.remove();
+                    if (!container.querySelector('.pic-fallback, .pic-image')) {
+                        showFallback(container);
+                    }
+                };
+                container.appendChild(img);
+                return img;
+            }
+
+            async function renderInto(container, word) {
+                container.innerHTML = '';
+                const known = getImage(word);
+                if (known) {
+                    mountImage(container, known.url, known.kind, known.fallbackUrl);
+                    return appendHearButton(container);
+                }
+
+                showFallback(container);
+                const hear = appendHearButton(container);
+                const wikiUrl = await fetchWikiThumb(word);
+                if (wikiUrl && container.isConnected) {
+                    const fallback = container.querySelector('.pic-fallback');
+                    if (fallback) fallback.remove();
+                    if (!container.querySelector('.pic-image')) {
+                        mountImage(container, wikiUrl, 'photo', null);
+                    }
+                }
+                return hear;
+            }
+
+            function renderHintInto(el, word) {
+                if (!el) return;
+                const known = getImage(word);
+                if (known) {
+                    el.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.className = 'spell-hint-img' + (known.kind === 'illustration' ? ' is-illustration' : '');
+                    img.src = known.url;
+                    img.alt = '';
+                    img.draggable = false;
+                    img.onerror = function () {
+                        if (known.fallbackUrl && img.dataset.retried !== '1') {
+                            img.dataset.retried = '1';
+                            img.classList.add('is-illustration');
+                            img.src = known.fallbackUrl;
+                            return;
+                        }
+                        el.textContent = get(word) || '✏️';
+                    };
+                    el.appendChild(img);
+                    return;
+                }
+                el.textContent = get(word) || '✏️';
+                fetchWikiThumb(word).then(function (url) {
+                    if (!url || !el.isConnected) return;
+                    el.innerHTML = '';
+                    const img = document.createElement('img');
+                    img.className = 'spell-hint-img';
+                    img.src = url;
+                    img.alt = '';
+                    img.draggable = false;
+                    el.appendChild(img);
+                });
+            }
+
             function pickDistractors(answer, count, fromWords) {
                 const pool = Phonics.shuffle([
                     ...new Set([
-                        ...(fromWords || []).filter(w => w !== answer),
-                        ...DECOYS.filter(w => w !== answer)
+                        ...(fromWords || []).filter(function (w) { return w !== answer; }),
+                        ...DECOYS.filter(function (w) { return w !== answer; })
                     ])
                 ]);
                 return pool.slice(0, count);
             }
 
-            return { get, renderInto, pickDistractors, MAP };
+            return {
+                get: get,
+                getImage: getImage,
+                getImageUrl: getImageUrl,
+                renderInto: renderInto,
+                renderHintInto: renderHintInto,
+                pickDistractors: pickDistractors,
+                MAP: EMOJI,
+                PHOTOS: PHOTOS
+            };
         })();
 
         /* =========================================================
@@ -3183,7 +3504,7 @@
                 return state.words || [];
             }
 
-            function setupRound(word) {
+            async function setupRound(word) {
                 currentWord = word;
                 busy = false;
                 const words = currentWords();
@@ -3191,13 +3512,14 @@
                 progressEl.textContent = `${idx + 1} / ${words.length}`;
                 guideEl.textContent = '그림을 보고 알맞은 단어를 골라 보세요!';
 
-                const hearBtn = WordPictures.renderInto(pictureEl, word);
+                const hearBtn = await WordPictures.renderInto(pictureEl, word);
                 hearBtn.addEventListener('click', () => {
                     // 힌트: 첫 소리만 살짝 (정답 전체는 말하지 않음)
                     const tokens = Phonics.tokenize(word);
                     TTS.speak(tokens[0] || word[0]);
                 });
 
+                // 오답 후보도 의미 이미지가 등록된 단어 위주로 구성
                 const distractors = WordPictures.pickDistractors(word, 3, words);
                 const options = Phonics.shuffle([word, ...distractors]).slice(0, 4);
 
@@ -3275,9 +3597,6 @@
             function bind() {
                 document.getElementById('stage2RestartBtn').addEventListener('click', () => {
                     start(state.progress.matchWordIndex || 0);
-                });
-                document.getElementById('stage2ToWordsBtn').addEventListener('click', () => {
-                    Router.go('words', { onEnter: () => WordsScreen.sync() });
                 });
                 document.getElementById('stage2HomeBtn').addEventListener('click', () => Router.go('home'));
             }
@@ -3375,7 +3694,8 @@
                 const words = currentWords();
                 const wi = state.progress.spellWordIndex || 0;
                 progressEl.textContent = `단어 ${wi + 1}/${words.length}`;
-                hintPic.textContent = WordPictures.get(currentWord) || '✏️';
+                hintPic.textContent = '';
+                WordPictures.renderHintInto(hintPic, currentWord);
             }
 
             function renderSlots() {
@@ -3548,9 +3868,6 @@
             function bind() {
                 document.getElementById('stage3RestartBtn').addEventListener('click', () => {
                     start(state.progress.spellWordIndex || 0, state.progress.spellBlankLevel || 1);
-                });
-                document.getElementById('stage3ToWordsBtn').addEventListener('click', () => {
-                    Router.go('words', { onEnter: () => WordsScreen.sync() });
                 });
                 document.getElementById('stage3HomeBtn').addEventListener('click', () => Router.go('home'));
             }
